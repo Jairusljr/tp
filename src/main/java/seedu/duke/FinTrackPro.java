@@ -106,7 +106,31 @@ public class FinTrackPro {
 
     private void handleAdd(String userInput){
         String rest = userInput.substring("add".length()).trim();
-        BigDecimal amount = new BigDecimal(rest);
+        //if there is no input after add
+        if(rest.isEmpty()){
+            ui.printLine("Format: add <value(to 2dp)> bro! where is the MONEHHHH");
+        }
+
+        BigDecimal amount;
+
+        try{
+            amount = new BigDecimal(rest);
+        } catch (NumberFormatException e) {
+            ui.printLine("Amount must be a valid number bro! What is this garbage!");
+            return;
+        }
+
+        //Reject negative values
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            ui.printLine("Amount cannot be negative bro who you trying to scam?");
+            return;
+        }
+
+        // Reject >2 decimal places
+        if (amount.scale() > 2) {
+            ui.printLine("Amount must not exceed 2 decimal places bro we dont want your measly cents!");
+            return;
+        }
 
         expenseList.add(amount);
 
