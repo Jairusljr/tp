@@ -138,16 +138,18 @@ public class FinTrackPro {
         expenseList.add(amount);
 
         ui.printLine("Added expense: $" + amount);
+        ui.printLine("Current Total: $" + expenseList.getTotal());
 
     }
 
-    private void handelDelete(String userInput){
+    private void handleDelete(String userInput){
         String rest = userInput.substring("delete".length()).trim();
         int index = Integer.parseInt(rest);
 
         BigDecimal removed = expenseList.delete(index);
 
         ui.printLine("Deleted expense #" + index + ": $" + removed);
+        ui.printLine("Current Total: $" + expenseList.getTotal());
     }
     private void handleSalary(Scanner in) {
         // Show previous input
