@@ -14,6 +14,12 @@ public class ExpenseList {
         total = total.add(amount);
     }
 
+    public BigDecimal delete(int indexInList){
+        int indexToDelete = indexInList - 1;
+        BigDecimal removed = expenses.remove(indexToDelete);
+        total = total.subtract(removed);
+        return removed;
+    }
     public BigDecimal getTotal(){
         return total;
     }
