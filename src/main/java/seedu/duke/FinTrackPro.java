@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.data.Expense;
 import seedu.duke.ui.Ui;
 import seedu.duke.util.InputUtil;
 import seedu.duke.data.Profile;
@@ -34,13 +35,13 @@ public class FinTrackPro {
 
         // Initial goal setup
         BigDecimal goal = InputUtil.readMoney(ui, in,
-                "What is the total amount that you and your partner have to pay for "
-                        + "the downpayment? (in dollars)");
+                "What is the total value  that you and your partner have to pay for "
+                        + "the house? (in dollars)");
 
-        BigDecimal legalFees = goal.multiply(new BigDecimal("0.025"));
+        BigDecimal legalFees = goal.multiply(new BigDecimal("1.1"));
         BigDecimal totalRequired = goal.add(legalFees);
 
-        ui.printLine("Sweeeett. Including 2.5% legal fees, you will need "
+        ui.printLine("Sweeeett. Including legal fees, you will need "
                 + InputUtil.formatMoney(totalRequired));
 
         // Deadline Handling
@@ -112,6 +113,7 @@ public class FinTrackPro {
         //if there is no input after add
         if(rest.isEmpty()){
             ui.printLine("Format: add <value(to 2dp)> bro! where is the MONEHHHH");
+            return;
         }
 
         BigDecimal amount;
@@ -157,9 +159,9 @@ public class FinTrackPro {
             return;
         }
 
-        BigDecimal removed = expenseList.delete(index);
+        Expense removed = expenseList.delete(index);
 
-        ui.printLine("Deleted expense #" + index + ": $" + removed);
+        ui.printLine("Deleted expense #" + index + ": $" + removed.getAmount());
         ui.printLine("Current Total: $" + expenseList.getTotal());
     }
     private void handleSalary(Scanner in) {
