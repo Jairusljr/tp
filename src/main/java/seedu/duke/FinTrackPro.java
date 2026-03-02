@@ -58,17 +58,24 @@ public class FinTrackPro {
         ui.printLine("Hang tight... I have a few questions for you.");
 
         // Initial goal setup
-        BigDecimal goal = InputUtil.readMoney(ui, in,
+        BigDecimal housePrice = InputUtil.readMoney(ui, in,
                 "What is the total value that you and your partner have to pay for "
                         + "the house? (in dollars)");
 
-        BigDecimal legalFees = goal.multiply(BigDecimal.valueOf(1.1));
-        BigDecimal totalRequired = goal.add(legalFees);
+        BigDecimal newRatio = InputUtil.readRatio(ui, in,
+                "What is your share of the contribution? (e.g., 0.6 for 60%):");
+        profile.setContributionRatio(newRatio);
 
-        ui.printLine("Sweeeett. Including legal fees, you will need "
-                + InputUtil.formatMoney(totalRequired) + " for the initial downpayment phase");
+        BigDecimal downPayment = housePrice.multiply(new BigDecimal("0.025"));
+        BigDecimal legalFees = downPayment.multiply(BigDecimal.valueOf(1.1));
+        BigDecimal totalDownpayment = downPayment.add(legalFees);
+        BigDecimal yourShare = totalDownpayment.multiply(newRatio);
 
-        profile.setBtoGoal(totalRequired);
+        ui.printLine("Total downpayment needed: " + InputUtil.formatMoney(totalDownpayment));
+        ui.printLine("Based on a " + newRatio.multiply(new BigDecimal("100")) + "% share...");
+        ui.printLine("Your personal contribution needed: " + InputUtil.formatMoney(yourShare));
+
+        profile.setBtoGoal(yourShare);
 
         // Deadline Handling
         LocalDate deadline = InputUtil.readFutureDate(
@@ -386,10 +393,9 @@ public class FinTrackPro {
     /**
      * Displays and updates the user's BTO contribution ratio (share of payment).
      *
-     * <p>Prompts the user for a decimal value (e.g., 0.6 for 60%). If parsing fails,
+     * <p>Prompts the user for a decimal value (e.g., 0.60 for 60%). If parsing fails,
      * the ratio remains unchanged and a message is printed.</p>
      *
-     * <p>Note: This method currently does not enforce a numeric range (0.0 to 1.0).</p>
      *
      * @param in Scanner used to read the user's ratio input.
      */
@@ -399,7 +405,7 @@ public class FinTrackPro {
         BigDecimal displayPercentage = current.multiply(new BigDecimal("100"));
         ui.printLine("Current BTO contribution share: " + displayPercentage + "%");
 
-        BigDecimal newRatio = InputUtil.readRatio(ui, in, "Enter your new share (e.g., 0.6 for 60%):");
+        BigDecimal newRatio = InputUtil.readRatio(ui, in, "Enter your new share (e.g., 0.60 for 60%):");
 
         profile.setContributionRatio(newRatio);
         ui.printLine("Contribution ratio updated!");
