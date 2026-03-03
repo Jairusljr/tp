@@ -7,6 +7,7 @@ import java.math.BigDecimal;
  * and specific targets for BTO downpayment planning.
  */
 public class Profile {
+    private String name = "friend";
     private BigDecimal monthlySalary;
     private BigDecimal currentSavings;
     private BigDecimal spendingGoal;
@@ -22,6 +23,24 @@ public class Profile {
         this.contributionRatio = new BigDecimal("0.5");
         this.spendingGoal = BigDecimal.ZERO;
         this.btoGoal = BigDecimal.ZERO;
+    }
+
+    /**
+     * Updates the user's name.
+     *
+     * @param name The name to be associated with this profile.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets the user's name.
+     *
+     * @return The name stored in the profile, or "friend" if not set.
+     */
+    public String getName() {
+        return name;
     }
 
     /**
