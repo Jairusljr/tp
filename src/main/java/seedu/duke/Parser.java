@@ -32,6 +32,6 @@ public class Parser {
         if (input == null || input.trim().isEmpty()) {
             return "";
         }
-        return input.trim().split(" ", MAX_SPLIT_LENGTH)[0];
+        return input.trim().split(" ", MAX_SPLIT_LENGTH)[0].toLowerCase();
     }
 }

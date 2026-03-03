@@ -30,7 +30,7 @@ Date format needs to be YYYY-MM-DD (e.g., 2026-12-31). Try again.
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
 Date format needs to be YYYY-MM-DD (e.g., 2026-12-31). Try again.
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
-You have 1 years and 7 months remaining.
+You have 1 years and 6 months remaining.
 
 Type 'help' to view my currently supported commands!
 Any non-command word would be echoed back to you you you
@@ -47,4 +47,5 @@ You said: hello
 'goal' <amount> - view and update your monthly spending goal
 'clear' - wipe all current expenses from the list
 'summary' - generate your BTO readiness report based on your goals
+'reset' - Wipes all profile data and expenses to start fresh.
 Goodbye James Gosling. Stay disciplined and get that house that you always wanted!

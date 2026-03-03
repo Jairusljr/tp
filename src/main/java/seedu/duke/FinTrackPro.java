@@ -1,11 +1,13 @@
 package seedu.duke;
 
 import seedu.duke.data.Expense;
+import seedu.duke.data.Storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.util.InputUtil;
 import seedu.duke.data.Profile;
 import seedu.duke.data.ExpenseList;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Scanner;
@@ -28,6 +30,7 @@ public class FinTrackPro {
     private final Ui ui;
     private final Profile profile = new Profile();
     private final ExpenseList expenseList = new ExpenseList();
+    private final Storage storage = new Storage("fintrack.txt");
 
     public FinTrackPro(Ui ui) {
         this.ui = ui;
@@ -47,8 +50,51 @@ public class FinTrackPro {
      */
     public void run() {
         ui.showWelcome();
-        Scanner in = new Scanner(System.in);
 
+        // Load existing data
+        try {
+            storage.load(profile, expenseList);
+        } catch (IOException e) {
+            ui.printLine("Warning: Could not load previous data. Starting fresh!");
+        }
+
+        Scanner in = new Scanner(System.in);
+        String name;
+
+        // Check if btoGoal is already set
+        if (profile.getBtoGoal().compareTo(java.math.BigDecimal.ZERO) <= 0) {
+            name = performInitialSetup(in);
+            profile.setName(name);
+        } else {
+            name = profile.getName();
+            ui.printLine("Welcome back " + name + "! Loading your existing profile...");
+        }
+
+        // Help Lines
+        ui.printLine("");
+        ui.printLine("Type 'help' to view my currently supported commands!");
+        ui.printLine("Any non-command word would be echoed back to you you you");
+        ui.printLine("");
+
+        // Main Command Loop
+        String userInput = ui.readLine(in, "");
+        while (!userInput.equalsIgnoreCase("bye")) {
+            handleCommand(userInput, in);
+            userInput = ui.readLine(in, "");
+        }
+
+        // Save everything before closing
+        try {
+            storage.save(profile, expenseList);
+        } catch (IOException e) {
+            ui.printLine("Critical Error: Your financial data could not be saved!");
+        }
+
+        ui.goodBye(name);
+        in.close();
+    }
+
+    private String performInitialSetup(Scanner in) {
         // Name handling
         String name = ui.readLine(in, "What is your name?");
         name = name.isEmpty() ? "friend" : name.trim();
@@ -90,20 +136,7 @@ public class FinTrackPro {
         ui.printLine("You have " + period.getYears() + " years and "
                 + period.getMonths() + " months remaining.");
 
-        // Help Lines
-        ui.printLine("");
-        ui.printLine("Type 'help' to view my currently supported commands!");
-        ui.printLine("Any non-command word would be echoed back to you you you");
-        ui.printLine("");
-
-        // Main Command Loop
-        String userInput = ui.readLine(in, "");
-        while (!userInput.equalsIgnoreCase("bye")) {
-            handleCommand(userInput, in);
-            userInput = ui.readLine(in, "");
-        }
-        ui.goodBye(name);
-        in.close();
+        return name;
     }
 
     /**
@@ -149,13 +182,16 @@ public class FinTrackPro {
             printList();
             break;
         case "goal":
-            handleGoal(userInput);
+            handleGoal(in);
             break;
         case "clear":
             handleClear(in);
             break;
         case "summary":
             handleSummary();
+            break;
+        case "reset":
+            handleReset(in);
             break;
         default:
             ui.printLine("You said: " + userInput);
@@ -302,52 +338,34 @@ public class FinTrackPro {
     }
 
     /**
-     * Displays or updates the user's spending goal.
+     * Displays the current monthly spending goal and prompts for an updated value.
      *
-     * <p>Usage:
+     * <p>Usage: {@code goal}</p>
+     *
+     * <p>The method performs the following:
      * <ul>
-     *   <li>{@code goal} - displays the current goal and help text</li>
-     *   <li>{@code goal <amount>} - updates the goal to the given amount</li>
+     * <li>Displays the existing goal retrieved from the user's {@link Profile}</li>
+     * <li>Prompts the user for a new goal amount using {@link InputUtil#readMoney}</li>
+     * <li>Updates the profile with the validated amount</li>
+     * <li>Checks if current total expenditure from {@link ExpenseList} already exceeds this goal</li>
      * </ul></p>
      *
-     * <p>Validation:
-     * <ul>
-     *   <li>Rejects non-numeric amounts</li>
-     *   <li>Rejects negative goals</li>
-     * </ul></p>
+     * <p>Validation is handled by {@code InputUtil}, which rejects non-numeric and negative values.</p>
      *
-     * <p>If the current total expenditure already exceeds the new goal, prints an alert.</p>
-     *
-     * @param userInput Full command line entered by the user (starting with {@code goal}).
+     * @param in Scanner used to read the user's new goal amount.
      */
-    private void handleGoal(String userInput) {
-        String rest = userInput.substring("goal".length()).trim();
+    private void handleGoal(Scanner in) {
+        BigDecimal currentGoal = profile.getSpendingGoal();
+        ui.printLine("Current monthly spending goal: " + InputUtil.formatMoney(currentGoal));
 
-        if (rest.isEmpty()) {
-            ui.printLine("Current spending goal: " + InputUtil.formatMoney(profile.getSpendingGoal()));
-            ui.printLine("To update, use: goal <amount>");
-            return;
-        }
-
-        BigDecimal newGoal;
-        try {
-            newGoal = new BigDecimal(rest);
-        } catch (NumberFormatException e) {
-            ui.printLine("Invalid amount! 'goal " + rest + "' is not a number, bro.");
-            return;
-        }
-
-        if (newGoal.compareTo(BigDecimal.ZERO) < 0) {
-            ui.printLine("Goal cannot be negative! You can't budget for negative money!!.");
-            return;
-        }
+        BigDecimal newGoal = InputUtil.readMoney(ui, in, "Enter your new monthly spending goal:");
 
         profile.setSpendingGoal(newGoal);
-        ui.printLine("Spending goal updated to: " + InputUtil.formatMoney(newGoal));
+        ui.printLine("Spending goal successfully updated to: " + InputUtil.formatMoney(newGoal));
 
         BigDecimal totalSpent = expenseList.getTotal();
         if (totalSpent.compareTo(newGoal) > 0) {
-            ui.printLine("Alert: You've already exceeded this goal by "
+            ui.printLine("Alert: You've already exceeded this new goal by "
                     + InputUtil.formatMoney(totalSpent.subtract(newGoal)) + "!");
         }
     }
@@ -452,10 +470,42 @@ public class FinTrackPro {
         }
 
         ui.printLine("======= BTO Readiness Report ====");
+        ui.printLine("User: " + profile.getName());
+        ui.printLine("Monthly Salary: " + InputUtil.formatMoney(monthlySalary));
         ui.printLine("Current Goal: " + InputUtil.formatMoney(btoGoal) + " (your share + fees)");
         ui.printLine("Current Savings: " + InputUtil.formatMoney(currentSavings) + " (" + percentage + "% reached)");
         ui.printLine("Distance to Goal: " + InputUtil.formatMoney(distance));
         ui.printLine("Monthly Surplus: " + InputUtil.formatMoney(monthlySurplus));
         ui.printLine("Estimated Goal Achievement: " + estimate);
+    }
+
+    /**
+     * Completely resets the user profile and expense list after confirmation.
+     * @param in Scanner used for user confirmation.
+     */
+    private void handleReset(Scanner in) {
+        ui.printLine("WARNING: This will wipe your profile and ALL expenses. Continue? (Y/N)");
+        String response = in.nextLine().trim().toLowerCase();
+
+        if (response.equals("y")) {
+            // 1. Reset in-memory objects
+            profile.setName("friend");
+            profile.setBtoGoal(BigDecimal.ZERO);
+            profile.setMonthlySalary(BigDecimal.ZERO);
+            profile.setCurrentSavings(BigDecimal.ZERO);
+            profile.setSpendingGoal(BigDecimal.ZERO);
+            profile.setContributionRatio(new BigDecimal("0.5"));
+            expenseList.clear();
+
+            // 2. Overwrite the save file with the empty data
+            try {
+                storage.save(profile, expenseList);
+                ui.printLine("System reset successful. Please restart or type 'bye' to exit.");
+            } catch (IOException e) {
+                ui.printLine("Error: Could not reset the save file on disk.");
+            }
+        } else {
+            ui.printLine("Reset aborted. Your data is safe!");
+        }
     }
 }

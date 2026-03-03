@@ -81,5 +81,6 @@ public class Ui {
         printLine("'goal' <amount> - view and update your monthly spending goal");
         printLine("'clear' - wipe all current expenses from the list");
         printLine("'summary' - generate your BTO readiness report based on your goals");
+        printLine("'reset' - Wipes all profile data and expenses to start fresh.");
     }
 }
