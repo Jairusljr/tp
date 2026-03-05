@@ -11,4 +11,15 @@ asdf-00-jj
 2027-10-02
 hello
 help
+list
+goal
+2000
+add 5
+add
+add -1
+category 2
+category hello
+category
+category 1 food
+list
 bye

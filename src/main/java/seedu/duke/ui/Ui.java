@@ -73,6 +73,8 @@ public class Ui {
         printLine("'bye' - exit the program");
         printLine("'help' - view all current commands");
         printLine("'add' <value(to 2dp)> - add expense for the month");
+        printLine("'category' <index in list> <category> - add categories to expenses.");
+        printLine("AVAILABLE CATEGORIES: FOOD, TRANSPORT, GROCERIES, OTHER, SUBSCRIPTION");
         printLine("'delete' <index in list> - delete the expense in the specified index");
         printLine("'salary' - view and update your monthly salary");
         printLine("'savings' - view and update your total current savings");

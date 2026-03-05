@@ -34,4 +34,11 @@ public class Parser {
         }
         return input.trim().split(" ", MAX_SPLIT_LENGTH)[0].toLowerCase();
     }
+
+    public static int parseIndex(String indexString) {
+        if (!indexString.matches("\\d+")) {
+            return -1;
+        }
+        return Integer.parseInt(indexString);
+    }
 }

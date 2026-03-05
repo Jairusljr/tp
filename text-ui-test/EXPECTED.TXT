@@ -39,6 +39,8 @@ You said: hello
 'bye' - exit the program
 'help' - view all current commands
 'add' <value(to 2dp)> - add expense for the month
+'category' <index in list> <category> - add categories to expenses.
+AVAILABLE CATEGORIES: FOOD, TRANSPORT, GROCERIES, OTHER, SUBSCRIPTION
 'delete' <index in list> - delete the expense in the specified index
 'salary' - view and update your monthly salary
 'savings' - view and update your total current savings
@@ -48,4 +50,19 @@ You said: hello
 'clear' - wipe all current expenses from the list
 'summary' - generate your BTO readiness report based on your goals
 'reset' - Wipes all profile data and expenses to start fresh.
+Your expense list is as empty as my wallet. Go spend some money!
+Current monthly spending goal: $0.00
+Enter your new monthly spending goal:
+Spending goal successfully updated to: $2,000.00
+Added expense: $5
+Current Total: $5
+Format: add <value(to 2dp)> bro! where is the MONEHHHH
+Amount cannot be negative bro who you trying to scam?
+Format: category <number-on-list> <category> bruh its not that hard
+Format: category <number-on-list> <category> bruh its not that hard
+Format: category <number-on-list> <category> bruh its not that hard
+Donezzzz. Category FOOD assigned to expense #1
+Here is your current expenditure list!
+1. $5.00 [FOOD]
+Total Expenditure: $5
 Goodbye James Gosling. Stay disciplined and get that house that you always wanted!

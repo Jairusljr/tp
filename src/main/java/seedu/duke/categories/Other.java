@@ -1,8 +1,8 @@
 package seedu.duke.categories;
 
-public class Miscellaneous implements Category {
+public class Other implements Category {
     public String getTypeIcon() {
-        return "[Misc]";
+        return "[Other]";
     }
 
     public String toString() {

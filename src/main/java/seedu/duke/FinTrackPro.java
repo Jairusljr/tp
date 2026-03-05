@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.categories.CategoryType;
 import seedu.duke.data.Expense;
 import seedu.duke.data.Storage;
 import seedu.duke.ui.Ui;
@@ -167,7 +168,7 @@ public class FinTrackPro {
             handleRatio(in);
             break;
         case "category":
-            // addCategoryToExpense();
+            addCategoryToExpense(userInput);
             break;
         case "help":
             ui.showHelpMessage();
@@ -197,6 +198,50 @@ public class FinTrackPro {
             ui.printLine("You said: " + userInput);
             break;
         }
+    }
+
+    /**
+     * Add a category to an entry into the {@link ExpenseList}.
+     *
+     * <p>Expected format: {@code category <index> <category>}</p>
+     * <ul>
+     *   <li>Rejects missing index</li>
+     *   <li>Rejects missing category amount</li>
+     *   <li>Rejects invalid categories</li>
+     *   <li>Rejects non-numeric index</li>
+     * </ul>
+     *
+     * <p>On success, prints a success message and the updated category.</p>
+     *
+     * @param userInput Full command line entered by the user (starting with {@code category}).
+     */
+    private void addCategoryToExpense(String userInput) {
+        final int maxSplitLength = 3;
+        String[] substrings = userInput.split(" ", maxSplitLength);
+
+        if (substrings.length < 3) {
+            ui.printLine("Format: category <number-on-list> <category> bruh its not that hard");
+            return;
+        }
+
+        String indexString = substrings[1].trim();
+        String categoryInput = substrings[2].trim();
+
+        int index = Parser.parseIndex(indexString);
+
+        if (!expenseList.isValidIndex(index)) {
+            ui.printLine("Invalid index bro! Do you even know which expense you're looking for?");
+            return;
+        }
+
+        if (!CategoryType.isValid(categoryInput)) {
+            ui.printLine("Invalid category! Valid categories: FOOD, GROCERIES, OTHER, SUBSCRIPTION, TRANSPORT");
+            return;
+        }
+
+        Expense expense = expenseList.get(index - 1);
+        expense.setCategory(categoryInput);
+        ui.printLine("Donezzzz. Category " + categoryInput.toUpperCase() + " assigned to expense #" + index);
     }
 
     /**
@@ -266,12 +311,7 @@ public class FinTrackPro {
     private void handleDelete(String userInput){
         String rest = userInput.substring("delete".length()).trim();
 
-        if (!rest.matches("\\d+")) {
-            ui.printLine("Format: delete <number-on-list> bruh its not that hard");
-            return;
-        }
-
-        int index = Integer.parseInt(rest);
+        int index = Parser.parseIndex(rest);
 
         if (!expenseList.isValidIndex(index)) {
             ui.printLine("Invalid index bro! do you even know how much you've spent?");
@@ -280,7 +320,7 @@ public class FinTrackPro {
 
         Expense removed = expenseList.delete(index);
 
-        ui.printLine("Deleted expense #" + index + ": $" + removed.getAmount());
+        ui.printLine("Deleted expense #" + index + ": $" + removed.getAmount() + " [" + removed.getCategory() + "]");
         ui.printLine("Current Total: $" + expenseList.getTotal());
     }
 
@@ -324,7 +364,7 @@ public class FinTrackPro {
         for (int i = 0; i < expenseList.size(); i++) {
             Expense expense = expenseList.get(i);
             String formattedAmount = InputUtil.formatMoney(expense.getAmount());
-            ui.printLine((i + 1) + ". " + formattedAmount);
+            ui.printLine( (i + 1) +  ". " + formattedAmount + " [" + expense.getCategory() + "]");
         }
 
         BigDecimal totalSpent = expenseList.getTotal();
