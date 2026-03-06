@@ -12,11 +12,11 @@
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
-
+FinTrack Pro was created for individual students in a relationship who are planning to set aside finances for their share of a BTO downpayment.
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+An individual BTO budget planner for university students planning to apply for BTO that turns messy finances into a clear downpayment plan - showing how much the individual needs to save and whether additional financing is required.
+
 
 ## User Stories
 
