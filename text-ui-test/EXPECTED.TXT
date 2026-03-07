@@ -23,13 +23,13 @@ What is your share of the contribution? (e.g., 0.6 for 60%):
 Total downpayment needed: $1,522.50
 Based on a 60.0% share...
 Your personal contribution needed: $913.50
-When do you need to save this money by? (Enter in format YYYY-MM-DD)
+When do you need to save this money by?
 Deadline must be a future date. Try again.
-When do you need to save this money by? (Enter in format YYYY-MM-DD)
+When do you need to save this money by?
 Date format needs to be YYYY-MM-DD (e.g., 2026-12-31). Try again.
-When do you need to save this money by? (Enter in format YYYY-MM-DD)
+When do you need to save this money by?
 Date format needs to be YYYY-MM-DD (e.g., 2026-12-31). Try again.
-When do you need to save this money by? (Enter in format YYYY-MM-DD)
+When do you need to save this money by?
 You have 1 years and 6 months remaining.
 
 Type 'help' to view my currently supported commands!
@@ -46,14 +46,12 @@ AVAILABLE CATEGORIES: FOOD, TRANSPORT, GROCERIES, OTHER, SUBSCRIPTION
 'savings' - view and update your total current savings
 'ratio' - view and update your individual BTO contribution share
 'list' - view all current expenses
-'goal' <amount> - view and update your monthly spending goal
 'clear' - wipe all current expenses from the list
 'summary' - generate your BTO readiness report based on your goals
 'reset' - Wipes all profile data and expenses to start fresh.
 Your expense list is as empty as my wallet. Go spend some money!
-Current monthly spending goal: $0.00
-Enter your new monthly spending goal:
-Spending goal successfully updated to: $2,000.00
+You said: goal
+You said: 2000
 Added expense: $5
 Current Total: $5
 Format: add <value(to 2dp)> bro! where is the MONEHHHH

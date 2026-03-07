@@ -28,7 +28,7 @@ public class Storage {
     /**
      * Saves the current financial state to a text file.
      * <p>
-     * Format for Profile: {@code P | name | salary | savings | goal | btoGoal | ratio}
+     * Format for Profile: {@code P | name | salary | savings | btoGoal | ratio}
      * <p>
      * Format for Expenses: {@code E | amount | category}
      *
@@ -44,9 +44,9 @@ public class Storage {
                 profile.getName(),
                 profile.getMonthlySalary(),
                 profile.getCurrentSavings(),
-                profile.getSpendingGoal(),
                 profile.getBtoGoal(),
-                profile.getContributionRatio()));
+                profile.getContributionRatio(),
+                profile.getDeadline()));
 
         // Save Expenses (E)
         for (int i = 0; i < expenseList.size(); i++) {
@@ -86,9 +86,9 @@ public class Storage {
                 profile.setName(parts[1]);
                 profile.setMonthlySalary(new BigDecimal(parts[2]));
                 profile.setCurrentSavings(new BigDecimal(parts[3]));
-                profile.setSpendingGoal(new BigDecimal(parts[4]));
-                profile.setBtoGoal(new BigDecimal(parts[5]));
-                profile.setContributionRatio(new BigDecimal(parts[6]));
+                profile.setBtoGoal(new BigDecimal(parts[4]));
+                profile.setContributionRatio(new BigDecimal(parts[5]));
+                profile.setDeadline(java.time.LocalDate.parse(parts[6]));
             } else if (parts[0].equals("E")) {
                 expenseList.add(new BigDecimal(parts[1]));
                 expenseList.get(expenseList.size() - 1).setCategory(parts[2]);
