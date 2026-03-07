@@ -40,12 +40,13 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath);
 
         // Save Profile (P)
-        fw.write(String.format("P | %s | %s | %s | %s | %s%n",
+        fw.write(String.format("P | %s | %s | %s | %s | %s | %s%n",
                 profile.getName(),
                 profile.getMonthlySalary(),
                 profile.getCurrentSavings(),
                 profile.getBtoGoal(),
-                profile.getContributionRatio()));
+                profile.getContributionRatio(),
+                profile.getDeadline()));
 
         // Save Expenses (E)
         for (int i = 0; i < expenseList.size(); i++) {
@@ -87,6 +88,7 @@ public class Storage {
                 profile.setCurrentSavings(new BigDecimal(parts[3]));
                 profile.setBtoGoal(new BigDecimal(parts[4]));
                 profile.setContributionRatio(new BigDecimal(parts[5]));
+                profile.setDeadline(java.time.LocalDate.parse(parts[6]));
             } else if (parts[0].equals("E")) {
                 expenseList.add(new BigDecimal(parts[1]));
                 expenseList.get(expenseList.size() - 1).setCategory(parts[2]);

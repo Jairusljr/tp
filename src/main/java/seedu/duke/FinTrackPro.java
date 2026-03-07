@@ -125,12 +125,9 @@ public class FinTrackPro {
         profile.setBtoGoal(yourShare);
 
         // Deadline Handling
-        LocalDate deadline = InputUtil.readFutureDate(
-                ui,
-                in,
-                "When do you need to save this money by? "
-                        + "(Enter in format YYYY-MM-DD)"
-        );
+        LocalDate deadline = InputUtil.readFutureDate(ui, in, "When do you need to save this money by?");
+        profile.setDeadline(deadline);
+
         LocalDate today = LocalDate.now();
         Period period = Period.between(today, deadline);
 
