@@ -155,7 +155,8 @@ public class FinTrackPro {
         profile.setBtoGoal(yourShare);
 
         // Deadline Handling
-        LocalDate deadline = InputUtil.readFutureDate(ui, in, "When do you need to save this money by? (e.g., 2028-10-24)");
+        LocalDate deadline = InputUtil.readFutureDate(ui, in, "When do you need to save this money by?" +
+                " (e.g., 2028-10-24)");
         ui.printLine("");
         profile.setDeadline(deadline);
 

@@ -7,59 +7,58 @@ Secure the Keys, Secure the Dream
 
 I am FinBro's brother, FinTrack Pro!
 What is your name?
+
 Nice to meet you, James Gosling!
 
 Hang tight... I have a few questions for you.
+How much do you currently have in savings?
+
+What is your monthly salary? (in dollars)
+
 What is the total value that you and your partner have to pay for the house? (in dollars)
-Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-What is the total value that you and your partner have to pay for the house? (in dollars)
-Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-What is the total value that you and your partner have to pay for the house? (in dollars)
+
 What is your share of the contribution? (e.g., 0.6 for 60%):
-EH WRONG FORMAT! Enter a decimal between 0 and 1 (e.g., 0.5).
-What is your share of the contribution? (e.g., 0.6 for 60%):
-EH WRONG FORMAT! Enter a decimal between 0 and 1 (e.g., 0.5).
-What is your share of the contribution? (e.g., 0.6 for 60%):
+
 Total downpayment needed: $1,522.50
 Based on a 60.0% share...
 Your personal contribution needed: $913.50
-When do you need to save this money by?
-Deadline must be a future date. Try again.
-When do you need to save this money by?
-Date format needs to be YYYY-MM-DD (e.g., 2026-12-31). Try again.
-When do you need to save this money by?
-Date format needs to be YYYY-MM-DD (e.g., 2026-12-31). Try again.
-When do you need to save this money by?
+
+When do you need to save this money by? (e.g., 2028-10-24)
+
 You have 1 years and 6 months remaining.
 
 Type 'help' to view my currently supported commands!
 Any non-command word would be echoed back to you you you
 
 You said: hello
-'bye' - exit the program
-'help' - view all current commands
-'add' <value(to 2dp)> - add expense for the month
-'category' <index in list> <category> - add categories to expenses.
-AVAILABLE CATEGORIES: FOOD, TRANSPORT, GROCERIES, OTHER, SUBSCRIPTION
-'delete' <index in list> - delete the expense in the specified index
-'salary' - view and update your monthly salary
-'savings' - view and update your total current savings
-'ratio' - view and update your individual BTO contribution share
-'list' - view all current expenses
-'clear' - wipe all current expenses from the list
+'help'    - view all current commands
 'summary' - generate your BTO readiness report based on your goals
-'reset' - Wipes all profile data and expenses to start fresh.
+'bye'     - exit the program
+
+'add'      <amount> - add a new expense (e.g., add 5.50)
+'category' <index> <type> - assign a category to an expense
+[Valid types: FOOD, TRANSPORT, GROCERIES, SUBSCRIPTION, OTHER]
+'list'     - view all current expenses and your total spent
+'delete'   <index> - remove a specific expense from your list
+
+'savings' - add a surplus amount to your existing savings
+'clear'   - wipe all current expenses from the list
+'reset'   - wipes all profile data and expenses to start fresh.
 Your expense list is as empty as my wallet. Go spend some money!
-You said: goal
-You said: 2000
+Current total savings: $2,000.00
+Enter amount to add to your savings:
+
+Transaction successful!
+Added: $500.00
+New total savings: $2,500.00
+
 Added expense: $5
 Current Total: $5
 Format: add <value(to 2dp)> bro! where is the MONEHHHH
 Amount cannot be negative bro who you trying to scam?
-Format: category <number-on-list> <category> bruh its not that hard
-Format: category <number-on-list> <category> bruh its not that hard
-Format: category <number-on-list> <category> bruh its not that hard
 Donezzzz. Category FOOD assigned to expense #1
+Format: category <number-on-list> <category> bruh its not that hard
+Invalid category! Valid categories: FOOD, GROCERIES, OTHER, SUBSCRIPTION, TRANSPORT
 Here is your current expenditure list!
 1. $5.00 [FOOD]
 Total Expenditure: $5
