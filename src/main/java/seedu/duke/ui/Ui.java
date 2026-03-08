@@ -76,9 +76,7 @@ public class Ui {
         printLine("'category' <index in list> <category> - add categories to expenses.");
         printLine("AVAILABLE CATEGORIES: FOOD, TRANSPORT, GROCERIES, OTHER, SUBSCRIPTION");
         printLine("'delete' <index in list> - delete the expense in the specified index");
-        printLine("'salary' - view and update your monthly salary");
         printLine("'savings' - view and update your total current savings");
-        printLine("'ratio' - view and update your individual BTO contribution share");
         printLine("'list' - view all current expenses");
         printLine("'clear' - wipe all current expenses from the list");
         printLine("'summary' - generate your BTO readiness report based on your goals");

@@ -155,14 +155,8 @@ public class FinTrackPro {
         String command = Parser.parseCommand(userInput);
 
         switch (command) {
-        case "salary":
-            handleSalary(in);
-            break;
         case "savings":
             handleSavings(in);
-            break;
-        case "ratio":
-            handleRatio(in);
             break;
         case "category":
             addCategoryToExpense(userInput);
@@ -366,25 +360,6 @@ public class FinTrackPro {
     }
 
     /**
-     * Displays the user's current monthly salary and prompts for an updated value.
-     *
-     * <p>Uses {@link InputUtil#readMoney(Ui, Scanner, String)} for input parsing and validation.</p>
-     *
-     * @param in Scanner used to read the user's salary input.
-     */
-    private void handleSalary(Scanner in) {
-        // Show previous input
-        BigDecimal current = profile.getMonthlySalary();
-        ui.printLine("Current monthly salary: " + InputUtil.formatMoney(current));
-
-        // Prompt for update
-        BigDecimal newAmount = InputUtil.readMoney(ui, in, "Enter your new monthly salary:");
-        profile.setMonthlySalary(newAmount);
-
-        ui.printLine("Salary successfully updated to: " + InputUtil.formatMoney(newAmount));
-    }
-
-    /**
      * Displays the user's current savings and prompts for an updated value.
      *
      * <p>Uses {@link InputUtil#readMoney(Ui, Scanner, String)} for input parsing and validation.</p>
@@ -401,27 +376,6 @@ public class FinTrackPro {
         profile.setCurrentSavings(newAmount);
 
         ui.printLine("Savings successfully updated to: " + InputUtil.formatMoney(newAmount));
-    }
-
-    /**
-     * Displays and updates the user's BTO contribution ratio (share of payment).
-     *
-     * <p>Prompts the user for a decimal value (e.g., 0.60 for 60%). If parsing fails,
-     * the ratio remains unchanged and a message is printed.</p>
-     *
-     *
-     * @param in Scanner used to read the user's ratio input.
-     */
-    private void handleRatio(Scanner in) {
-        BigDecimal current = profile.getContributionRatio();
-
-        BigDecimal displayPercentage = current.multiply(new BigDecimal("100"));
-        ui.printLine("Current BTO contribution share: " + displayPercentage + "%");
-
-        BigDecimal newRatio = InputUtil.readRatio(ui, in, "Enter your new share (e.g., 0.60 for 60%):");
-
-        profile.setContributionRatio(newRatio);
-        ui.printLine("Contribution ratio updated!");
     }
 
     /**
