@@ -95,24 +95,53 @@ public class FinTrackPro {
         in.close();
     }
 
+    /**
+     * Conducts the first-time onboarding sequence for new users.
+     * * <p>This method sequentially prompts for and initializes:
+     * <ul>
+     * <li>User's name</li>
+     * <li>Current liquid savings and monthly salary</li>
+     * <li>Total BTO house price and the user's specific contribution ratio</li>
+     * <li>Target deadline for the savings goal</li>
+     * </ul>
+     * </p>
+     * * <p>It calculates the user's specific financial goal by applying the 2.5%
+     * downpayment rate and legal fees to the house price, adjusted by their
+     * contribution share.</p>
+     *
+     * @param in Scanner instance to read user inputs.
+     * @return The validated or default name of the user.
+     */
     private String performInitialSetup(Scanner in) {
-        // Name handling
+        // 1. Name handling
         String name = ui.readLine(in, "What is your name?");
         name = name.isEmpty() ? "friend" : name.trim();
+        ui.printLine("");
         ui.greet(name);
 
         ui.printLine("");
         ui.printLine("Hang tight... I have a few questions for you.");
 
-        // Initial goal setup
+        // Prompt for monthly salary, current savings, total value of BTO & individual contribution ratio
+        BigDecimal savings = InputUtil.readMoney(ui, in, "How much do you currently have in savings?");
+        ui.printLine("");
+        profile.setCurrentSavings(savings);
+
+        BigDecimal salary = InputUtil.readMoney(ui, in, "What is your monthly salary? (in dollars)");
+        ui.printLine("");
+        profile.setMonthlySalary(salary);
+
         BigDecimal housePrice = InputUtil.readMoney(ui, in,
                 "What is the total value that you and your partner have to pay for "
                         + "the house? (in dollars)");
+        ui.printLine("");
 
         BigDecimal newRatio = InputUtil.readRatio(ui, in,
                 "What is your share of the contribution? (e.g., 0.6 for 60%):");
         profile.setContributionRatio(newRatio);
+        ui.printLine("");
 
+        // Calculate individual share of user's downpayment
         BigDecimal downPayment = housePrice.multiply(new BigDecimal("0.025"));
         BigDecimal legalFees = downPayment.multiply(BigDecimal.valueOf(1.1));
         BigDecimal totalDownpayment = downPayment.add(legalFees);
@@ -121,16 +150,20 @@ public class FinTrackPro {
         ui.printLine("Total downpayment needed: " + InputUtil.formatMoney(totalDownpayment));
         ui.printLine("Based on a " + newRatio.multiply(new BigDecimal("100")) + "% share...");
         ui.printLine("Your personal contribution needed: " + InputUtil.formatMoney(yourShare));
+        ui.printLine("");
 
         profile.setBtoGoal(yourShare);
 
         // Deadline Handling
-        LocalDate deadline = InputUtil.readFutureDate(ui, in, "When do you need to save this money by?");
+        LocalDate deadline = InputUtil.readFutureDate(ui, in, "When do you need to save this money by?" +
+                " (e.g., 2028-10-24)");
+        ui.printLine("");
         profile.setDeadline(deadline);
 
         LocalDate today = LocalDate.now();
         Period period = Period.between(today, deadline);
 
+        // Calculate time remaining
         ui.printLine("You have " + period.getYears() + " years and "
                 + period.getMonths() + " months remaining.");
 
@@ -145,7 +178,6 @@ public class FinTrackPro {
      *
      * @param userInput Raw line entered by the user.
      * @param in Scanner used for follow-up prompts for commands that require more input
-     *           (e.g., salary, savings, ratio, clear).
      */
     private void handleCommand(String userInput, Scanner in) {
         if (userInput.trim().isEmpty()) {
@@ -155,14 +187,8 @@ public class FinTrackPro {
         String command = Parser.parseCommand(userInput);
 
         switch (command) {
-        case "salary":
-            handleSalary(in);
-            break;
         case "savings":
             handleSavings(in);
-            break;
-        case "ratio":
-            handleRatio(in);
             break;
         case "category":
             addCategoryToExpense(userInput);
@@ -366,62 +392,26 @@ public class FinTrackPro {
     }
 
     /**
-     * Displays the user's current monthly salary and prompts for an updated value.
+     * Adds a specified amount to the user's current total savings.
      *
-     * <p>Uses {@link InputUtil#readMoney(Ui, Scanner, String)} for input parsing and validation.</p>
-     *
-     * @param in Scanner used to read the user's salary input.
-     */
-    private void handleSalary(Scanner in) {
-        // Show previous input
-        BigDecimal current = profile.getMonthlySalary();
-        ui.printLine("Current monthly salary: " + InputUtil.formatMoney(current));
-
-        // Prompt for update
-        BigDecimal newAmount = InputUtil.readMoney(ui, in, "Enter your new monthly salary:");
-        profile.setMonthlySalary(newAmount);
-
-        ui.printLine("Salary successfully updated to: " + InputUtil.formatMoney(newAmount));
-    }
-
-    /**
-     * Displays the user's current savings and prompts for an updated value.
-     *
-     * <p>Uses {@link InputUtil#readMoney(Ui, Scanner, String)} for input parsing and validation.</p>
-     *
-     * @param in Scanner used to read the user's savings input.
+     * @param in Scanner used to read the user's deposit input.
      */
     private void handleSavings(Scanner in) {
-        // Show previous input
         BigDecimal current = profile.getCurrentSavings();
         ui.printLine("Current total savings: " + InputUtil.formatMoney(current));
 
-        // Prompt for update
-        BigDecimal newAmount = InputUtil.readMoney(ui, in, "Enter your new total savings:");
-        profile.setCurrentSavings(newAmount);
+        // Prompt for the amount to add
+        BigDecimal depositAmount = InputUtil.readMoney(ui, in, "Enter amount to add to your savings:");
 
-        ui.printLine("Savings successfully updated to: " + InputUtil.formatMoney(newAmount));
-    }
+        // Update profile by adding to the current balance
+        BigDecimal updatedSavings = current.add(depositAmount);
+        profile.setCurrentSavings(updatedSavings);
 
-    /**
-     * Displays and updates the user's BTO contribution ratio (share of payment).
-     *
-     * <p>Prompts the user for a decimal value (e.g., 0.60 for 60%). If parsing fails,
-     * the ratio remains unchanged and a message is printed.</p>
-     *
-     *
-     * @param in Scanner used to read the user's ratio input.
-     */
-    private void handleRatio(Scanner in) {
-        BigDecimal current = profile.getContributionRatio();
-
-        BigDecimal displayPercentage = current.multiply(new BigDecimal("100"));
-        ui.printLine("Current BTO contribution share: " + displayPercentage + "%");
-
-        BigDecimal newRatio = InputUtil.readRatio(ui, in, "Enter your new share (e.g., 0.60 for 60%):");
-
-        profile.setContributionRatio(newRatio);
-        ui.printLine("Contribution ratio updated!");
+        ui.printLine("");
+        ui.printLine("Transaction successful!");
+        ui.printLine("Added: " + InputUtil.formatMoney(depositAmount));
+        ui.printLine("New total savings: " + InputUtil.formatMoney(updatedSavings));
+        ui.printLine("");
     }
 
     /**

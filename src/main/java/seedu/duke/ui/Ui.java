@@ -70,18 +70,23 @@ public class Ui {
      * and brief descriptions of their purpose.</p>
      */
     public void showHelpMessage() {
-        printLine("'bye' - exit the program");
-        printLine("'help' - view all current commands");
-        printLine("'add' <value(to 2dp)> - add expense for the month");
-        printLine("'category' <index in list> <category> - add categories to expenses.");
-        printLine("AVAILABLE CATEGORIES: FOOD, TRANSPORT, GROCERIES, OTHER, SUBSCRIPTION");
-        printLine("'delete' <index in list> - delete the expense in the specified index");
-        printLine("'salary' - view and update your monthly salary");
-        printLine("'savings' - view and update your total current savings");
-        printLine("'ratio' - view and update your individual BTO contribution share");
-        printLine("'list' - view all current expenses");
-        printLine("'clear' - wipe all current expenses from the list");
+        // General Commands
+        printLine("'help'    - view all current commands");
         printLine("'summary' - generate your BTO readiness report based on your goals");
-        printLine("'reset' - Wipes all profile data and expenses to start fresh.");
+        printLine("'bye'     - exit the program");
+        printLine("");
+
+        // Daily Transaction Commands
+        printLine("'add'      <amount> - add a new expense (e.g., add 5.50)");
+        printLine("'category' <index> <type> - assign a category to an expense");
+        printLine("[Valid types: FOOD, TRANSPORT, GROCERIES, SUBSCRIPTION, OTHER]");
+        printLine("'list'     - view all current expenses and your total spent");
+        printLine("'delete'   <index> - remove a specific expense from your list");
+        printLine("");
+
+        // Profile & Goal Management
+        printLine("'savings' - add a surplus amount to your existing savings");
+        printLine("'clear'   - wipe all current expenses from the list");
+        printLine("'reset'   - wipes all profile data and expenses to start fresh.");
     }
 }
