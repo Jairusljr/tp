@@ -3,8 +3,6 @@ package seedu.duke.ui;
 import seedu.duke.data.SummaryReport;
 import seedu.duke.util.InputUtil;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -99,15 +97,16 @@ public class Ui {
      * @param report a {@link SummaryReport} containing the user's precomputed financial snapshot.
      */
     public void showSummaryReport(SummaryReport report) {
-            printLine("===== BTO Readiness Report =====");
-            printLine("User: " + report.name);
-            printLine("Dateline: " + report.deadline);
-            printLine("BTO Goal: " + InputUtil.formatMoney(report.btoGoal) + " (your share + fees)");
-            printLine("Monthly Salary: " + InputUtil.formatMoney(report.monthlySalary));
-            printLine("Current Savings: " + InputUtil.formatMoney(report.currentSavings) + " (" + report.percentage + "% reached)");
-            printLine("Distance to Goal: " + InputUtil.formatMoney(report.distance));
-            printLine("Monthly Surplus: " + InputUtil.formatMoney(report.monthlySurplus));
-            printLine("Estimated Goal Achievement: " + report.estimate);
+        printLine("===== BTO Readiness Report =====");
+        printLine("User: " + report.name);
+        printLine("Dateline: " + report.deadline);
+        printLine("BTO Goal: " + InputUtil.formatMoney(report.btoGoal) + " (your share + fees)");
+        printLine("Monthly Salary: " + InputUtil.formatMoney(report.monthlySalary));
+        String savingsLine = InputUtil.formatMoney(report.currentSavings) + " (" + report.percentage + "% reached)";
+        printLine("Current Savings: " + savingsLine);
+        printLine("Distance to Goal: " + InputUtil.formatMoney(report.distance));
+        printLine("Monthly Surplus: " + InputUtil.formatMoney(report.monthlySurplus));
+        printLine("Estimated Goal Achievement: " + report.estimate);
     }
 
 }

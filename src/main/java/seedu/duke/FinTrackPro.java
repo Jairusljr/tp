@@ -189,14 +189,30 @@ public class FinTrackPro {
         String command = Parser.parseCommand(userInput);
 
         switch (command) {
-        case "add": handler.handleAdd(userInput); break;
-        case "delete": handler.handleDelete(userInput); break;
-        case "list": printList(); break;
-        case "help": ui.showHelpMessage(); break;
-        case "savings": handler.handleSavings(in); break;
-        case "clear": handler.handleClear(in); break;
-        case "summary": handler.handleSummary(); break;
-        case "reset": handler.handleReset(in); break;
+        case "add":
+            handler.handleAdd(userInput);
+            break;
+        case "delete":
+            handler.handleDelete(userInput);
+            break;
+        case "list":
+            printList();
+            break;
+        case "help":
+            ui.showHelpMessage();
+            break;
+        case "savings":
+            handler.handleSavings(in);
+            break;
+        case "clear":
+            handler.handleClear(in);
+            break;
+        case "summary":
+            handler.handleSummary();
+            break;
+        case "reset":
+            handler.handleReset(in);
+            break;
         default:
             ui.printLine("You said: " + userInput);
             break;
