@@ -49,8 +49,7 @@ public class CommandHandler {
 
             // If there is no input after add
             if (rest.isEmpty()) {
-                throw new InvalidAmountException(InvalidAmountException.ErrorReason.MISSING,
-                        "Format: add <value(to 2dp)> bro! where is the MONEHHHH");
+                throw new InvalidAmountException("Format: add <value(to 2dp)> bro! where is the MONEHHHH");
             }
 
             BigDecimal amount;
@@ -58,20 +57,17 @@ public class CommandHandler {
             try {
                 amount = new BigDecimal(rest);
             } catch (NumberFormatException e) {
-                throw new InvalidAmountException(InvalidAmountException.ErrorReason.NON_NUMERIC,
-                        "Amount must be a valid number bro! What is this garbage!");
+                throw new InvalidAmountException("Amount must be a valid number bro! What is this garbage!");
             }
 
             //Reject negative values
             if (amount.compareTo(BigDecimal.ZERO) < 0) {
-                throw new InvalidAmountException(InvalidAmountException.ErrorReason.NEGATIVE,
-                        "Amount cannot be negative bro who you trying to scam?");
+                throw new InvalidAmountException("Amount cannot be negative bro who you trying to scam?");
             }
 
             // Reject >2 decimal places
             if (amount.scale() > 2) {
-                throw new InvalidAmountException(InvalidAmountException.ErrorReason.TOO_MANY_DP,
-                        "Amount must not exceed 2 decimal places bro we dont want your measly cents!");
+                throw new InvalidAmountException("Amount must not exceed 2 decimal places bro!");
             }
 
             expenseList.add(amount);
@@ -105,15 +101,13 @@ public class CommandHandler {
 
             // If there is no input after delete
             if (rest.isEmpty()){
-                throw new InvalidIndexException(InvalidIndexException.ErrorReason.MISSING,
-                        "Format: delete <index> bro! where is the INDEXXX");
+                throw new InvalidIndexException("Format: delete <index> bro! where is the INDEXXX");
             }
 
             int index = Parser.parseIndex(rest);
 
             if (!expenseList.isValidIndex(index)) {
-                throw new InvalidIndexException(InvalidIndexException.ErrorReason.INVALID,
-                        "Invalid index bro! do you even know how much you've spent?");
+                throw new InvalidIndexException("Invalid index bro! do you even know how much you've spent?");
             }
 
             Expense removed = expenseList.delete(index);
