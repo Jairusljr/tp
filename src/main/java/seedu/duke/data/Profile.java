@@ -1,6 +1,7 @@
 package seedu.duke.data;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
  * Manages the user's personal financial data, including income, savings,
@@ -10,9 +11,9 @@ public class Profile {
     private String name = "friend";
     private BigDecimal monthlySalary;
     private BigDecimal currentSavings;
-    private BigDecimal spendingGoal;
     private BigDecimal btoGoal;
     private BigDecimal contributionRatio;
+    private LocalDate deadline = LocalDate.now();
 
     /**
      * Initializes a profile with zero Salary/Savings and a default 50/50 split ratio.
@@ -21,8 +22,27 @@ public class Profile {
         this.monthlySalary = BigDecimal.ZERO;
         this.currentSavings = BigDecimal.ZERO;
         this.contributionRatio = new BigDecimal("0.5");
-        this.spendingGoal = BigDecimal.ZERO;
         this.btoGoal = BigDecimal.ZERO;
+    }
+
+    /**
+     * Retrieves the target date by which the BTO savings goal should be met.
+     *
+     * @return The {@code LocalDate} representing the savings deadline.
+     */
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
+    /**
+     * Updates the target savings deadline.
+     *
+     * <p>This date is used to calculate the remaining time in the BTO Readiness Report.</p>
+     *
+     * @param deadline The new {@code LocalDate} to set as the savings deadline.
+     */
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 
     /**
@@ -107,19 +127,11 @@ public class Profile {
         return contributionRatio;
     }
 
-    /**
-     * Sets the user's monthly spending limit.
-     * @param spendingGoal The spending goal amount.
-     */
-    public void setSpendingGoal(BigDecimal spendingGoal) {
-        this.spendingGoal = spendingGoal;
-    }
-
-    /**
-     * Gets the user's monthly spending limit.
-     * @return The spending goal as a {@code BigDecimal}.
-     */
-    public BigDecimal getSpendingGoal() {
-        return spendingGoal;
+    public void reset() {
+        this.name = "friend";
+        this.btoGoal = BigDecimal.ZERO;
+        this.monthlySalary = BigDecimal.ZERO;
+        this.currentSavings = BigDecimal.ZERO;
+        this.contributionRatio = new BigDecimal("0.5");
     }
 }

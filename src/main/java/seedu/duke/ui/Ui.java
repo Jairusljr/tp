@@ -1,5 +1,10 @@
 package seedu.duke.ui;
 
+import seedu.duke.data.SummaryReport;
+import seedu.duke.util.InputUtil;
+
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Scanner;
 
 /**
@@ -70,19 +75,53 @@ public class Ui {
      * and brief descriptions of their purpose.</p>
      */
     public void showHelpMessage() {
-        printLine("'bye' - exit the program");
-        printLine("'help' - view all current commands");
-        printLine("'add' <value(to 2dp)> - add expense for the month");
-        printLine("'category' <index in list> <category> - add categories to expenses.");
-        printLine("AVAILABLE CATEGORIES: FOOD, TRANSPORT, GROCERIES, OTHER, SUBSCRIPTION");
-        printLine("'delete' <index in list> - delete the expense in the specified index");
-        printLine("'salary' - view and update your monthly salary");
-        printLine("'savings' - view and update your total current savings");
-        printLine("'ratio' - view and update your individual BTO contribution share");
-        printLine("'list' - view all current expenses");
-        printLine("'goal' <amount> - view and update your monthly spending goal");
-        printLine("'clear' - wipe all current expenses from the list");
+        printLine("General Commands");
+        printLine("'help'    - view all current commands");
         printLine("'summary' - generate your BTO readiness report based on your goals");
-        printLine("'reset' - Wipes all profile data and expenses to start fresh.");
+        printLine("'bye'     - exit the program");
+        printLine("");
+
+        printLine("Daily Transaction Commands");
+        printLine("'add'      <amount> - add a new expense (e.g., add 5.50)");
+        printLine("'list'     - view all current expenses and your total spent");
+        printLine("'delete'   <index> - remove a specific expense from your list");
+        printLine("");
+
+        printLine("Profile & Goal Management");
+        printLine("'savings' - add a surplus amount to your existing savings");
+        printLine("'clear'   - wipe all current expenses from the list");
+        printLine("'reset'   - wipes all profile data and expenses to start fresh.");
+        printLine("");
     }
+
+    /**
+     * Prints a formatted BTO Readiness Report to the console.
+     *
+     * @param report a {@link SummaryReport} containing the user's precomputed financial snapshot.
+     */
+    public void showSummaryReport(SummaryReport report) {
+        printLine("===== BTO Readiness Report =====");
+        printLine("User: " + report.name);
+        printLine("BTO Goal: " + InputUtil.formatMoney(report.btoGoal) + " (your share + fees)");
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(today, report.deadline);
+
+        int monthsLeft = period.getYears() * 12 + period.getMonths();
+        if (period.getDays() > 0) {
+            monthsLeft++;
+        }
+
+        printLine("Deadline: " + report.deadline + " (" + monthsLeft + " months)");
+        printLine("");
+        String savingsLine = InputUtil.formatMoney(report.currentSavings) + " (" + report.percentage + "% reached)";
+        printLine("Current Savings: " + savingsLine);
+        printLine("Distance to Goal: " + InputUtil.formatMoney(report.distance));
+        printLine("");
+        printLine("Monthly Salary: " + InputUtil.formatMoney(report.monthlySalary));
+        printLine("Total Expenditure: " + InputUtil.formatMoney(report.totalExpenditure));
+        printLine("Monthly Surplus: " + InputUtil.formatMoney(report.monthlySurplus));
+        printLine("Estimated Goal Achievement: " + report.estimate);
+        printLine("");
+    }
+
 }

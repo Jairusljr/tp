@@ -84,17 +84,8 @@ public class InputUtil {
                 continue;
             }
 
-            try {
-                BigDecimal amount = new BigDecimal(moneyString);
+            return new BigDecimal(moneyString);
 
-                if (amount.compareTo(BigDecimal.ZERO) < 0) {
-                    ui.printLine("The amount cannot be negative. Please try again.");
-                    continue;
-                }
-                return amount;
-            } catch (NumberFormatException e) {
-                ui.printLine("Invalid number. Please try again!");
-            }
         }
     }
 

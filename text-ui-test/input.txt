@@ -1,25 +1,19 @@
 James Gosling
-20.000
--70
+2000
+2500.50
 29000
-jk
-jk.00
 0.6
-2013-10-02
-asdj-10-02
-asdf-00-jj
 2027-10-02
 hello
 help
 list
-goal
-2000
+savings
+500
 add 5
 add
 add -1
-category 2
-category hello
-category
-category 1 food
+category 1 FOOD
+category 1
+category 1 HELLO
 list
 bye
