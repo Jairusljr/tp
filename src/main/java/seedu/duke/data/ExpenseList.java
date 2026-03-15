@@ -33,8 +33,8 @@ public class ExpenseList {
         assert expenses.size() == sizeBeforeAdd + 1
                 : "List size should have increaseed by 1 after add";
         // Post-add invariant: total must not have decreased
-        assert total.compareTo(totalBeforeAdd) >= 0
-                : "Total should not decrease after adding an expense.";
+        assert total.compareTo(totalBeforeAdd.add(amount)) == 0
+                : "Total should increase by exactly the added amount.";
 
         // Post-add invariant: total must never be negative
         assert total.compareTo(BigDecimal.ZERO) >= 0
