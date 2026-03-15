@@ -18,6 +18,8 @@ public class Expense {
      */
     public Expense(BigDecimal amount) {
         this.amount = amount;
+        //Post-construction invariance where the stored value must match the input exactly
+        assert this.amount.compareTo(amount) == 0;
     }
 
     /**
