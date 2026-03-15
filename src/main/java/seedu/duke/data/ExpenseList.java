@@ -22,9 +22,15 @@ public class ExpenseList {
      * @param amount The monetary value of the expense to add.
      */
     public void add(BigDecimal amount){
+        //Added to capture pre mutation state for post mutation assertions
+        int sizeBefore = expenses.size();
+        BigDecimal totalBefore = total;
+
         Expense expense = new Expense(amount);
         expenses.add(expense);
         total = total.add(amount);
+
+
     }
 
     /**
