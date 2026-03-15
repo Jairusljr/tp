@@ -221,7 +221,7 @@ public class CommandHandler {
 
         // If there is no input after add
         if (rest.isEmpty()) {
-            throw new InvalidAmountException("Format: add <value(to 2dp)> bro! where is the MONEHHHH");
+            throw new InvalidAmountException("Format: add <value(to 2dp)> bro! where is the MONEHHHH\n");
         }
 
         BigDecimal amount;
@@ -229,17 +229,17 @@ public class CommandHandler {
         try {
             amount = new BigDecimal(rest);
         } catch (NumberFormatException e) {
-            throw new InvalidAmountException("Amount must be a valid number bro! What is this garbage!");
+            throw new InvalidAmountException("Amount must be a valid number bro! What is this garbage!\n");
         }
 
         //Reject negative values
         if (amount.compareTo(BigDecimal.ZERO) < 0) {
-            throw new InvalidAmountException("Amount cannot be negative bro who you trying to scam?");
+            throw new InvalidAmountException("Amount cannot be negative bro who you trying to scam?\n");
         }
 
         // Reject >2 decimal places
         if (amount.scale() > 2) {
-            throw new InvalidAmountException("Amount must not exceed 2 decimal places bro!");
+            throw new InvalidAmountException("Amount must not exceed 2 decimal places bro!\n");
         }
 
         assert amount.compareTo(BigDecimal.ZERO) >= 0 : "Amount should be non-negative";
@@ -252,13 +252,13 @@ public class CommandHandler {
 
         // If there is no input after delete
         if (rest.isEmpty()) {
-            throw new InvalidIndexException("Format: delete <index> bro! where is the INDEXXX");
+            throw new InvalidIndexException("Format: delete <index> bro! where is the INDEXXX\n");
         }
 
         int index = Parser.parseIndex(rest);
 
         if (!expenseList.isValidIndex(index)) {
-            throw new InvalidIndexException("Invalid index bro! do you even know how much you've spent?");
+            throw new InvalidIndexException("Invalid index bro! do you even know how much you've spent?\n");
         }
         
         return index;

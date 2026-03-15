@@ -16,7 +16,6 @@ package seedu.duke;
  */
 public class Parser {
     public static final int MAX_SPLIT_LENGTH = 2;
-
     /**
      * Extracts the command keyword from a raw input string.
      *

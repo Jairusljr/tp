@@ -107,7 +107,6 @@ public class Ui {
      * @param report a {@link SummaryReport} containing the user's precomputed financial snapshot.
      */
     public void showSummaryReport(SummaryReport report) {
-        assert report != null : "SummaryReport should not be null";
         assert report.name != null : "Report name should not be null";
         assert report.deadline != null : "Deadline should not be null";
         assert report.currentSavings != null : "Current savings should not be null";
