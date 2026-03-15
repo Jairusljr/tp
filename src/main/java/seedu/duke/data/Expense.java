@@ -19,7 +19,7 @@ public class Expense {
     public Expense(BigDecimal amount) {
         this.amount = amount;
         //Post-construction invariance where the stored value must match the input exactly
-        assert this.amount.compareTo(amount) == 0;
+        assert this.amount.compareTo(amount) == 0 :"Stored amouint does not match input.";
     }
 
     /**
@@ -28,6 +28,8 @@ public class Expense {
      * @return The expense amount as a {@code BigDecimal}.
      */
     public BigDecimal getAmount() {
+        //Invariant: Amount must never be null after successful construction
+        assert amount != null : "Expense should never be null after construction.";
         return amount;
     }
 
