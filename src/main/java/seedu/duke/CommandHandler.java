@@ -9,12 +9,20 @@ import seedu.duke.exception.InvalidAmountException;
 import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.ui.Ui;
 import seedu.duke.util.InputUtil;
+import seedu.duke.util.LoggerUtil;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class CommandHandler {
+    /**
+     * Logger for recording command handler events.
+     * Routes all output to the central {@code logs/fintrack.log} via {@link LoggerUtil}.
+     */
+    private static final Logger logger = LoggerUtil.getLogger(CommandHandler.class);
+
     private final Ui ui;
     private final Profile profile;
     private final ExpenseList expenseList;
