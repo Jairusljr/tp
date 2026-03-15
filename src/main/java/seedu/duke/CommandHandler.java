@@ -79,6 +79,8 @@ public class CommandHandler {
             ui.printLine("");
 
         } catch (InvalidAmountException e) {
+            // Log at WARNING: user provided invalid input that was rejected
+            logger.warning("handleAdd rejected | reason: " + e.getMessage().trim());
             ui.printLine(e.getMessage());
             ui.printLine("");
         }
