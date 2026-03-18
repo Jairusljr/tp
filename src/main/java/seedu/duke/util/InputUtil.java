@@ -45,6 +45,7 @@ public class InputUtil {
      * @return Formatted currency string.
      */
     public static String formatMoney(BigDecimal amount) {
+        assert amount != null : "formatMoney: amount must not be null";
         // Log at INFO: user provided valid string input which is accepted
         logger.info("formatMoney succeeded | amount: " + amount + ", formatted: " + MONEY_FMT.format(amount));
         return MONEY_FMT.format(amount);
@@ -80,8 +81,12 @@ public class InputUtil {
      * @return 2.5% of the validated monetary amount.
      */
     public static BigDecimal readMoney(Ui ui, Scanner in, String prompt) {
+        assert ui != null : "readMoney: ui must not be null";
+        assert in != null : "readMoney: in must not be null";
+        assert prompt != null : "readMoney: prompt must not be null";
+
         while (true) {
-            String moneyString = ui.readLine(in,prompt).trim();
+            String moneyString = ui.readLine(in, prompt).trim();
 
             if (!moneyString.matches("\\d+(\\.\\d{1,2})?")) {
                 // Log at WARNING: user provided invalid format string which is rejected
@@ -91,7 +96,9 @@ public class InputUtil {
                 continue;
             }
 
-            return new BigDecimal(moneyString);
+            BigDecimal result = new BigDecimal(moneyString);
+            assert result.compareTo(BigDecimal.ZERO) >= 0 : "readMoney: parsed amount must be non-negative";
+            return result;
 
         }
     }
@@ -114,6 +121,9 @@ public class InputUtil {
      * @return A {@link LocalDate} that is strictly after today.
      */
     public static LocalDate readFutureDate(Ui ui, Scanner in, String prompt) {
+        assert ui != null : "readFutureDate: ui must not be null";
+        assert in != null : "readFutureDate: in must not be null";
+        assert prompt != null : "readFutureDate: prompt must not be null";
         while (true) {
             String s = ui.readLine(in, prompt).trim();
 
@@ -128,6 +138,7 @@ public class InputUtil {
                     continue;
                 }
 
+                assert date.isAfter(LocalDate.now()) : "readFutureDate: returned date must be strictly in the future";
                 // Log at FINE: readFutureDate is a low-level detail, not a key app event
                 logger.fine("readFutureDate successful | date: " + date);
                 return date;
@@ -167,6 +178,10 @@ public class InputUtil {
      * @return A validated {@link BigDecimal} between 0 and 1.
      */
     public static BigDecimal readRatio(Ui ui, Scanner in, String prompt) {
+        assert ui != null : "readRatio: ui must not be null";
+        assert in != null : "readRatio: in must not be null";
+        assert prompt != null : "readRatio: prompt must not be null";
+
         while (true) {
             String input = ui.readLine(in, prompt).trim();
 
@@ -189,6 +204,8 @@ public class InputUtil {
                     continue;
                 }
 
+                assert ratio.compareTo(BigDecimal.ZERO) >= 0 && ratio.compareTo(BigDecimal.ONE) <= 0
+                        : "readRatio: returned ratio must be between 0.0 and 1.0 inclusive";
                 // Log at FINE: readRatio is a low-level detail, not a key app event
                 logger.fine("readRatio successful | ratio: " + ratio);
                 return ratio;
