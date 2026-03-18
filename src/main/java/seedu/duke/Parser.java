@@ -19,12 +19,13 @@ import java.util.logging.Logger;
  * </p>
  */
 public class Parser {
+    public static final int MAX_SPLIT_LENGTH = 2;
+
     /**
      * Logger for recording command handler events.
      * Routes all output to the central {@code logs/fintrack.log} via {@link LoggerUtil}.
      */
     private static final Logger logger = LoggerUtil.getLogger(CommandHandler.class);
-    public static final int MAX_SPLIT_LENGTH = 2;
 
     /**
      * Extracts the command keyword from a raw input string.
