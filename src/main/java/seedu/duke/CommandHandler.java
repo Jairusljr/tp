@@ -1,6 +1,11 @@
 package seedu.duke;
 
-import seedu.duke.data.*;
+import seedu.duke.data.Category;
+import seedu.duke.data.Expense;
+import seedu.duke.data.ExpenseList;
+import seedu.duke.data.Profile;
+import seedu.duke.data.Storage;
+import seedu.duke.data.SummaryReport;
 import seedu.duke.exception.InvalidAmountException;
 import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.ui.Ui;
