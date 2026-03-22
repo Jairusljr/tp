@@ -1,6 +1,7 @@
 package seedu.duke.data;
 
 import java.math.BigDecimal;
+import seedu.duke.category.Category;
 
 /**
  * Represents an individual financial expense within the FinTrackPro system.

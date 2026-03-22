@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import seedu.duke.category.Category;
 
 /**
  * Handles the persistence of user profile data and expense lists to a local file.
@@ -126,7 +127,7 @@ public class Storage {
                     if (parts.length == 2) {
                         // Old format: E | amount
                         BigDecimal amount = new BigDecimal(parts[1]);
-                        expenseList.add("Unnamed Expense", amount, Category.OTHER);
+                        expenseList.add("Unnamed Expense", amount, Category.fromString("OTHER"));
                     } else if (parts.length == 4) {
                         // New format: E | name | amount | category
                         String name = parts[1];

@@ -5,6 +5,8 @@ import seedu.duke.data.Storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.util.BtoCalculator;
 import seedu.duke.util.InputUtil;
+
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import seedu.duke.data.Profile;
@@ -264,7 +266,7 @@ public class FinTrackPro {
             break;
         case "list":
             logger.info("Executing list command.");
-            printList();
+            printSortedList(userInput.trim().equalsIgnoreCase("list sorted"));
             break;
         case "help":
             logger.info("Executing help command.");
@@ -310,7 +312,7 @@ public class FinTrackPro {
      * <p>Also checks the user's spending goal from {@link Profile}.
      * If total expenditure exceeds the goal, prints an alert with the exceeded amount.</p>
      */
-    private void printList(){
+    private void printSortedList(boolean isSorted){
         if (expenseList.isEmpty()) {
             logger.info("Expense list requested, but list is empty.");
             ui.printLine("Your expense list is as empty as my wallet. Go spend some money!");
@@ -318,11 +320,15 @@ public class FinTrackPro {
             return;
         }
 
+        ArrayList<Expense> displayList = isSorted
+                ? expenseList.getSortedByCategory()
+                : expenseList.getRaw();
+
         logger.info("Printing expense list. Number of expenses: " + expenseList.size());
         ui.printLine("Here is your current expenditure list!");
 
-        for (int i = 0; i < expenseList.size(); i++) {
-            Expense expense = expenseList.get(i);
+        for (int i = 0; i < displayList.size(); i++) {
+            Expense expense = displayList.get(i);
             String formattedAmount = InputUtil.formatMoney(expense.getAmount());
             ui.printLine( (i + 1) +  ". " + formattedAmount);
         }

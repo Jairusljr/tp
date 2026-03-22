@@ -3,7 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import seedu.duke.data.Category;
+import seedu.duke.category.Category;
 import seedu.duke.data.ExpenseList;
 import seedu.duke.data.Profile;
 import seedu.duke.data.SummaryReport;
@@ -23,7 +23,7 @@ public class SummaryReportTest {
         profile.setDeadline(LocalDate.of(2027,8,6));
 
         ExpenseList expenses = new ExpenseList();
-        expenses.add("Groceries", new BigDecimal("500"), Category.FOOD);
+        expenses.add("Groceries", new BigDecimal("500"), Category.fromString("FOOD"));
 
         SummaryReport report = new SummaryReport(profile, expenses);
 
@@ -42,7 +42,7 @@ public class SummaryReportTest {
         profile.setDeadline(LocalDate.of(2027, 8, 6));
 
         ExpenseList expenses = new ExpenseList();
-        expenses.add("Groceries", new BigDecimal("500"), Category.FOOD);
+        expenses.add("Groceries", new BigDecimal("500"), Category.fromString("FOOD"));
 
         SummaryReport report = new SummaryReport(profile, expenses);
 
@@ -60,7 +60,7 @@ public class SummaryReportTest {
         profile.setDeadline(LocalDate.of(2027, 8, 6));
 
         ExpenseList expenses = new ExpenseList();
-        expenses.add("Rent", new BigDecimal("4000"), Category.UTILITIES);
+        expenses.add("Rent", new BigDecimal("4000"), Category.fromString("UTILITIES"));
 
         SummaryReport report = new SummaryReport(profile, expenses);
 
@@ -78,7 +78,7 @@ public class SummaryReportTest {
         profile.setDeadline(LocalDate.of(2027, 8, 6));
 
         ExpenseList expenses = new ExpenseList();
-        expenses.add("Rent", new BigDecimal("3500"), Category.UTILITIES);
+        expenses.add("Rent", new BigDecimal("3500"), Category.fromString("UTILITIES"));
 
         SummaryReport report = new SummaryReport(profile, expenses);
 
@@ -96,7 +96,7 @@ public class SummaryReportTest {
         profile.setDeadline(LocalDate.of(2027, 8, 6));
 
         ExpenseList expenses = new ExpenseList();
-        expenses.add("Groceries", new BigDecimal("500"), Category.FOOD);
+        expenses.add("Groceries", new BigDecimal("500"), Category.fromString("FOOD"));
 
         SummaryReport report = new SummaryReport(profile, expenses);
 
@@ -113,7 +113,7 @@ public class SummaryReportTest {
         profile.setDeadline(LocalDate.of(2027, 8, 6));
 
         ExpenseList expenses = new ExpenseList();
-        expenses.add("Transport", new BigDecimal("1000"), Category.TRANSPORT);
+        expenses.add("Transport", new BigDecimal("1000"), Category.fromString("TRANSPORT"));
 
         SummaryReport report = new SummaryReport(profile, expenses);
 

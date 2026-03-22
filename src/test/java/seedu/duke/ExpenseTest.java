@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import seedu.duke.data.Expense;
-import seedu.duke.data.Category;
+import seedu.duke.category.Category;
 
 /**
  * Unit tests for {@link Expense}, verifying that fields are stored
@@ -17,11 +17,11 @@ public class ExpenseTest {
      */
     @Test
     void constructor_validInputs_fieldsStoredCorrectly() {
-        Expense expense = new Expense("lunch", new BigDecimal("12.50"), Category.FOOD);
+        Expense expense = new Expense("lunch", new BigDecimal("12.50"), Category.fromString("FOOD"));
 
         assertEquals("lunch", expense.getName());
         assertEquals(new BigDecimal("12.50"), expense.getAmount());
-        assertEquals(Category.FOOD, expense.getCategory());
+        assertEquals(Category.fromString("FOOD"), expense.getCategory());
     }
 
     /**
@@ -29,7 +29,7 @@ public class ExpenseTest {
      */
     @Test
     void toString_validExpense_returnsFormattedString() {
-        Expense expense = new Expense("lunch", new BigDecimal("12.50"), Category.FOOD);
+        Expense expense = new Expense("lunch", new BigDecimal("12.50"), Category.fromString("FOOD"));
 
         assertEquals("[FOOD] lunch $12.50", expense.toString());
     }
@@ -39,7 +39,7 @@ public class ExpenseTest {
      */
     @Test
     void constructor_zeroAmount_storedAndDisplayedCorrectly() {
-        Expense expense = new Expense("free item", new BigDecimal("0"), Category.OTHER);
+        Expense expense = new Expense("free item", new BigDecimal("0"), Category.fromString("OTHER"));
 
         assertEquals(new BigDecimal("0"), expense.getAmount());
         assertEquals("[OTHER] free item $0", expense.toString());

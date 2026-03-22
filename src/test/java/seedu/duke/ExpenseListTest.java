@@ -2,7 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.data.Category;
+import seedu.duke.category.Category;
 import seedu.duke.data.Expense;
 import seedu.duke.data.ExpenseList;
 
@@ -31,7 +31,7 @@ public class ExpenseListTest {
      */
     @Test
     void add_singleExpense_sizeIsOne() {
-        expenseList.add("lunch", new BigDecimal("12.50"), Category.FOOD);
+        expenseList.add("lunch", new BigDecimal("12.50"), Category.fromString("FOOD"));
 
         assertEquals(1, expenseList.size());
     }
@@ -41,9 +41,9 @@ public class ExpenseListTest {
      */
     @Test
     void add_multipleExpenses_totalIsCorrectSum() {
-        expenseList.add("breakfast", new BigDecimal("10.00"), Category.FOOD);
-        expenseList.add("bus fare", new BigDecimal("5.50"), Category.TRANSPORT);
-        expenseList.add("snack", new BigDecimal("2.25"), Category.FOOD);
+        expenseList.add("breakfast", new BigDecimal("10.00"), Category.fromString("FOOD"));
+        expenseList.add("bus fare", new BigDecimal("5.50"), Category.fromString("TRANSPORT"));
+        expenseList.add("snack", new BigDecimal("2.25"), Category.fromString("FOOD"));
 
         assertEquals(new BigDecimal("17.75"), expenseList.getTotal());
     }
@@ -53,16 +53,16 @@ public class ExpenseListTest {
      */
     @Test
     void add_multipleExpenses_storedInOrder() {
-        expenseList.add("breakfast", new BigDecimal("10.00"), Category.FOOD);
-        expenseList.add("movie", new BigDecimal("20.00"), Category.ENTERTAINMENT);
+        expenseList.add("breakfast", new BigDecimal("10.00"), Category.fromString("FOOD"));
+        expenseList.add("movie", new BigDecimal("20.00"), Category.fromString("ENTERTAINMENT"));
 
         assertEquals("breakfast", expenseList.get(0).getName());
         assertEquals(new BigDecimal("10.00"), expenseList.get(0).getAmount());
-        assertEquals(Category.FOOD, expenseList.get(0).getCategory());
+        assertEquals(Category.fromString("FOOD"), expenseList.get(0).getCategory());
 
         assertEquals("movie", expenseList.get(1).getName());
         assertEquals(new BigDecimal("20.00"), expenseList.get(1).getAmount());
-        assertEquals(Category.ENTERTAINMENT, expenseList.get(1).getCategory());
+        assertEquals(Category.fromString("ENTERTAINMENT"), expenseList.get(1).getCategory());
     }
 
     /**
@@ -72,7 +72,7 @@ public class ExpenseListTest {
     void add_firstExpense_listWasEmptyBefore() {
         assertTrue(expenseList.isEmpty());
 
-        expenseList.add("coffee", new BigDecimal("5.00"), Category.FOOD);
+        expenseList.add("coffee", new BigDecimal("5.00"), Category.fromString("FOOD"));
 
         assertFalse(expenseList.isEmpty());
     }
@@ -82,7 +82,7 @@ public class ExpenseListTest {
      */
     @Test
     void delete_onlyExpense_listBecomesEmpty() {
-        expenseList.add("lunch", new BigDecimal("10.00"), Category.FOOD);
+        expenseList.add("lunch", new BigDecimal("10.00"), Category.fromString("FOOD"));
 
         expenseList.delete(1);
 
@@ -94,7 +94,7 @@ public class ExpenseListTest {
      */
     @Test
     void delete_onlyExpense_totalBecomesZero() {
-        expenseList.add("lunch", new BigDecimal("10.00"), Category.FOOD);
+        expenseList.add("lunch", new BigDecimal("10.00"), Category.fromString("FOOD"));
 
         expenseList.delete(1);
 
@@ -106,13 +106,13 @@ public class ExpenseListTest {
      */
     @Test
     void delete_returnsCorrectExpense() {
-        expenseList.add("concert", new BigDecimal("42.00"), Category.ENTERTAINMENT);
+        expenseList.add("concert", new BigDecimal("42.00"), Category.fromString("ENTERTAINMENT"));
 
         Expense removed = expenseList.delete(1);
 
         assertEquals("concert", removed.getName());
         assertEquals(new BigDecimal("42.00"), removed.getAmount());
-        assertEquals(Category.ENTERTAINMENT, removed.getCategory());
+        assertEquals(Category.fromString("ENTERTAINMENT"), removed.getCategory());
     }
 
     /**
@@ -121,19 +121,19 @@ public class ExpenseListTest {
      */
     @Test
     void delete_middleExpense_remainingOrderIsCorrect() {
-        expenseList.add("breakfast", new BigDecimal("10.00"), Category.FOOD);
-        expenseList.add("movie", new BigDecimal("20.00"), Category.ENTERTAINMENT);
-        expenseList.add("taxi", new BigDecimal("30.00"), Category.TRANSPORT);
+        expenseList.add("breakfast", new BigDecimal("10.00"), Category.fromString("FOOD"));
+        expenseList.add("movie", new BigDecimal("20.00"), Category.fromString("ENTERTAINMENT"));
+        expenseList.add("taxi", new BigDecimal("30.00"), Category.fromString("TRANSPORT"));
 
         expenseList.delete(2);
 
         assertEquals("breakfast", expenseList.get(0).getName());
         assertEquals(new BigDecimal("10.00"), expenseList.get(0).getAmount());
-        assertEquals(Category.FOOD, expenseList.get(0).getCategory());
+        assertEquals(Category.fromString("FOOD"), expenseList.get(0).getCategory());
 
         assertEquals("taxi", expenseList.get(1).getName());
         assertEquals(new BigDecimal("30.00"), expenseList.get(1).getAmount());
-        assertEquals(Category.TRANSPORT, expenseList.get(1).getCategory());
+        assertEquals(Category.fromString("TRANSPORT"), expenseList.get(1).getCategory());
     }
 
     /**
@@ -142,7 +142,7 @@ public class ExpenseListTest {
      */
     @Test
     void delete_invalidIndexZero_throwsException() {
-        expenseList.add("lunch", new BigDecimal("10.00"), Category.FOOD);
+        expenseList.add("lunch", new BigDecimal("10.00"), Category.fromString("FOOD"));
 
         assertThrows(IndexOutOfBoundsException.class, () -> expenseList.delete(0));
     }
@@ -153,7 +153,7 @@ public class ExpenseListTest {
      */
     @Test
     void delete_invalidIndexBeyondSize_throwsException() {
-        expenseList.add("lunch", new BigDecimal("10.00"), Category.FOOD);
+        expenseList.add("lunch", new BigDecimal("10.00"), Category.fromString("FOOD"));
 
         assertThrows(IndexOutOfBoundsException.class, () -> expenseList.delete(2));
     }
@@ -167,4 +167,3 @@ public class ExpenseListTest {
         assertThrows(IndexOutOfBoundsException.class, () -> expenseList.delete(1));
     }
 }
-

@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.data.Category;
+import seedu.duke.category.Category;
 import seedu.duke.data.Expense;
 import seedu.duke.data.ExpenseList;
 import seedu.duke.data.Profile;
@@ -150,6 +150,12 @@ public class CommandHandler {
         if (name.isBlank()) {
             logger.warning("handleAdd rejected | reason: blank expense name");
             throw new InvalidAmountException("Expense name cannot be empty.\n");
+        }
+
+        if (!Category.isValid(categoryString)) {
+            logger.warning("handleAdd rejected | reason: invalid category " + categoryString);
+            throw new InvalidAmountException("Invalid category! Valid categories: " +
+                    "FOOD, TRANSPORT, ENTERTAINMENT, UTILITIES, OTHER\n");
         }
 
         BigDecimal amount = parseAmount(amountString);
