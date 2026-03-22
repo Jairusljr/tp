@@ -13,12 +13,16 @@ public class OtherCategory extends Category {
      *
      * @return {@code "OTHER"}
      */
-    @Override public String getName() { return "OTHER"; }
+    @Override public String getName() {
+        return "OTHER";
+    }
 
     /**
      * {@inheritDoc}
      *
      * @return {@code 5}
      */
-    @Override public int getSortOrder() { return 5; }
+    @Override public int getSortOrder() {
+        return 5;
+    }
 }

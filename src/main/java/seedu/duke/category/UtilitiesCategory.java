@@ -13,12 +13,16 @@ public class UtilitiesCategory extends Category {
      *
      * @return {@code "UTILITIES"}
      */
-    @Override public String getName() { return "UTILITIES"; }
+    @Override public String getName() {
+        return "UTILITIES";
+    }
 
     /**
      * {@inheritDoc}
      *
      * @return {@code 4}
      */
-    @Override public int getSortOrder() { return 4; }
+    @Override public int getSortOrder() {
+        return 4;
+    }
 }

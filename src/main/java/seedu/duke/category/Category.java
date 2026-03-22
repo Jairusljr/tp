@@ -32,8 +32,8 @@ public abstract class Category implements Comparable<Category> {
     public static boolean isValid(String categoryString) {
         assert categoryString != null : "Category input string must not be null";
         return switch (categoryString.toUpperCase()) {
-            case "FOOD", "TRANSPORT", "ENTERTAINMENT", "UTILITIES", "OTHER" -> true;
-            default -> false;
+        case "FOOD", "TRANSPORT", "ENTERTAINMENT", "UTILITIES", "OTHER" -> true;
+        default -> false;
         };
     }
 
@@ -77,7 +77,9 @@ public abstract class Category implements Comparable<Category> {
      * @return The result of {@link #getName()}.
      */
     @Override
-    public String toString() { return getName(); }
+    public String toString() {
+        return getName();
+    }
 
     /**
      * Returns a {@code Category} instance corresponding to the given string.
@@ -97,14 +99,15 @@ public abstract class Category implements Comparable<Category> {
         assert input != null : "Category input string must not be null";
 
         Category result = switch (input.toUpperCase()) {
-            case "FOOD" -> new FoodCategory();
-            case "TRANSPORT" -> new TransportCategory();
-            case "ENTERTAINMENT" -> new EntertainmentCategory();
-            case "UTILITIES" -> new UtilitiesCategory();
-            case "OTHER" -> new OtherCategory();
-            default -> throw new IllegalArgumentException(
-                    "Unknown category: " + input);
-        };
+        case "FOOD" -> new FoodCategory();
+        case "TRANSPORT" -> new TransportCategory();
+        case "ENTERTAINMENT" -> new EntertainmentCategory();
+        case "UTILITIES" -> new UtilitiesCategory();
+        case "OTHER" -> new OtherCategory();
+        default -> throw new IllegalArgumentException(
+                "Unknown category: " + input);
+        }
+        ;
 
         logger.fine("fromString succeeded | input: " + input + " -> " + result.getName());
         return result;

@@ -13,12 +13,16 @@ public class FoodCategory extends Category{
      *
      * @return {@code "FOOD"}
      */
-    @Override public String getName() { return "FOOD"; }
+    @Override public String getName() {
+        return "FOOD";
+    }
 
     /**
      * {@inheritDoc}
      *
      * @return {@code 1}
      */
-    @Override public int getSortOrder() { return 1; }
+    @Override public int getSortOrder() {
+        return 1;
+    }
 }

@@ -13,12 +13,16 @@ public class TransportCategory extends Category {
      *
      * @return {@code "TRANSPORT"}
      */
-    @Override public String getName() { return "TRANSPORT"; }
+    @Override public String getName() {
+        return "TRANSPORT";
+    }
 
     /**
      * {@inheritDoc}
      *
      * @return {@code 2}
      */
-    @Override public int getSortOrder() { return 2; }
+    @Override public int getSortOrder() {
+        return 2;
+    }
 }

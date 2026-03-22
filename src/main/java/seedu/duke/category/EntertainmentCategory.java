@@ -13,12 +13,16 @@ public class EntertainmentCategory extends Category {
      *
      * @return {@code "FOOD"}
      */
-    @Override public String getName() { return "ENTERTAINMENT"; }
+    @Override public String getName() {
+        return "ENTERTAINMENT";
+    }
 
     /**
      * {@inheritDoc}
      *
      * @return {@code 3}
      */
-    @Override public int getSortOrder() { return 3; }
+    @Override public int getSortOrder() {
+        return 3;
+    }
 }
