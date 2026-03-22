@@ -272,14 +272,19 @@ public class CommandHandler {
      * @param in Scanner used to read the user's input.
      */
     public void handleAllowance(Scanner in) {
+        assert in != null : "Scanner should not be null";
         BigDecimal current = profile.getMonthlyAllowance();
+        assert current != null : "Current allowance in profile should not be null";
 
         ui.promptForAllowance(current);
         BigDecimal newAllowance = InputUtil.readMoney(ui, in, "Enter new monthly allowance:");
         ui.printLine("");
 
-        // Update and Log
         profile.setMonthlyAllowance(newAllowance);
+        assert profile.getMonthlyAllowance().equals(newAllowance) : "Profile failed to update allowance";
+
+        logger.info("handleAllowance executed | old: " + current + " | new: " + newAllowance);
+
         ui.printLine("Success! Your monthly allowance is now " + InputUtil.formatMoney(newAllowance));
         ui.printLine("");
     }
@@ -290,15 +295,21 @@ public class CommandHandler {
      * @param in Scanner used to read the user's input.
      */
     public void handleRatio(Scanner in) {
+        assert in != null : "Scanner should not be null";
+
         BigDecimal current = profile.getContributionRatio();
+        assert current != null : "Current ratio in profile should not be null";
 
         // Show current state
         ui.promptForRatio(current);
         BigDecimal newRatio = InputUtil.readRatio(ui, in, "Enter new ratio (0.0 to 1.0):");
         ui.printLine("");
 
-        // Update and Log
         profile.setContributionRatio(newRatio);
+        assert profile.getContributionRatio().equals(newRatio) : "Profile failed to update ratio";
+
+        logger.info("handleRatio executed | old: " + current + " | new: " + newRatio);
+
         ui.printLine("Success! Your contribution ratio is now " + newRatio);
         ui.printLine("");
     }
