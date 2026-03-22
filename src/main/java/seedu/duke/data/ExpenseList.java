@@ -3,7 +3,6 @@ package seedu.duke.data;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.stream.Collectors;
 import seedu.duke.category.Category;
 
 /**
