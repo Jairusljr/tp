@@ -25,7 +25,7 @@ Your personal contribution needed: $913.50
 
 When do you need to save this money by? (e.g., 2028-10-24)
 
-You have 1 years and 6 months and 10 days remaining.
+You have 1 years and 6 months and 9 days remaining.
 Nice! Based on your current savings, you have already met your goal.
 
 Type 'help' to view my currently supported commands!
@@ -73,8 +73,30 @@ You said: category 1
 
 You said: category 1 HELLO
 
+Added expense: [TRANSPORT] grab home $20
+Current Total: $25
+
+Added expense: [FOOD] hho $10
+Current Total: $35
+
+Wrong argument la bro! Use 'sort category' or 'sort recent' ONLY!
+
+Wrong argument la bro! Use 'sort category' or 'sort recent' ONLY!
+
+Expenses sorted by category.
+
 Here is your current expenditure list!
-1. $5.00
-Total Expenditure: $5
+1. lunch $5.00 [FOOD]
+2. hho $10.00 [FOOD]
+3. grab home $20.00 [TRANSPORT]
+Total Expenditure: $35
+
+Expenses sorted by insertion order.
+
+Here is your current expenditure list!
+1. lunch $5.00 [FOOD]
+2. grab home $20.00 [TRANSPORT]
+3. hho $10.00 [FOOD]
+Total Expenditure: $35
 
 Goodbye James Gosling. Stay disciplined and get that house that you always wanted!

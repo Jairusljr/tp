@@ -58,11 +58,11 @@ public class ExpenseListTest {
 
         assertEquals("breakfast", expenseList.get(0).getName());
         assertEquals(new BigDecimal("10.00"), expenseList.get(0).getAmount());
-        assertEquals(Category.fromString("FOOD"), expenseList.get(0).getCategory());
+        assertEquals("FOOD", expenseList.get(0).getCategory().getName());
 
         assertEquals("movie", expenseList.get(1).getName());
         assertEquals(new BigDecimal("20.00"), expenseList.get(1).getAmount());
-        assertEquals(Category.fromString("ENTERTAINMENT"), expenseList.get(1).getCategory());
+        assertEquals("ENTERTAINMENT", expenseList.get(1).getCategory().getName());
     }
 
     /**
@@ -112,7 +112,7 @@ public class ExpenseListTest {
 
         assertEquals("concert", removed.getName());
         assertEquals(new BigDecimal("42.00"), removed.getAmount());
-        assertEquals(Category.fromString("ENTERTAINMENT"), removed.getCategory());
+        assertEquals("ENTERTAINMENT", removed.getCategory().getName());
     }
 
     /**
@@ -129,11 +129,11 @@ public class ExpenseListTest {
 
         assertEquals("breakfast", expenseList.get(0).getName());
         assertEquals(new BigDecimal("10.00"), expenseList.get(0).getAmount());
-        assertEquals(Category.fromString("FOOD"), expenseList.get(0).getCategory());
+        assertEquals("FOOD", expenseList.get(0).getCategory().getName());
 
         assertEquals("taxi", expenseList.get(1).getName());
         assertEquals(new BigDecimal("30.00"), expenseList.get(1).getAmount());
-        assertEquals(Category.fromString("TRANSPORT"), expenseList.get(1).getCategory());
+        assertEquals("TRANSPORT", expenseList.get(1).getCategory().getName());
     }
 
     /**

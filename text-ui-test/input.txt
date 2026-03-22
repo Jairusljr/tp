@@ -15,5 +15,12 @@ add lunch -1 FOOD
 category 1 FOOD
 category 1
 category 1 HELLO
+add grab home 20 transport
+add hho 10 food
+sort
+sort foo
+sort category
+list
+sort recent
 list
 bye
