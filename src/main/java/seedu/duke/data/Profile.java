@@ -19,12 +19,21 @@ public class Profile {
     private BigDecimal housePrice;
 
     /**
+     * Initialises a profile with zero Allowance/Savings and a default 50/50 split ratio.
+     */
+    public Profile() {
+        this.monthlyAllowance = BigDecimal.ZERO;
+        this.currentSavings = BigDecimal.ZERO;
+        this.contributionRatio = new BigDecimal("0.5");
+        this.btoGoal = BigDecimal.ZERO;
+    }
+
+    /**
      * Sets the total purchase price of the BTO flat.
      * This value serves as the base for calculating the total downpayment
      * and the user's individual contribution goal.
      *
      * @param housePrice The total price of the HDB flat in dollars.
-     * Must be a non-negative value.
      */
     public void setHousePrice(BigDecimal housePrice) {
         assert housePrice != null && housePrice.compareTo(BigDecimal.ZERO) >= 0
@@ -40,16 +49,6 @@ public class Profile {
      */
     public BigDecimal getHousePrice() {
         return this.housePrice;
-    }
-
-    /**
-     * Initialises a profile with zero Allowance/Savings and a default 50/50 split ratio.
-     */
-    public Profile() {
-        this.monthlyAllowance = BigDecimal.ZERO;
-        this.currentSavings = BigDecimal.ZERO;
-        this.contributionRatio = new BigDecimal("0.5");
-        this.btoGoal = BigDecimal.ZERO;
     }
 
     /**
