@@ -20,6 +20,24 @@ public abstract class Category implements Comparable<Category> {
     private static final Logger logger = LoggerUtil.getLogger(Category.class);
 
     /**
+     * Returns {@code true} if the given string maps to a known category.
+     *
+     * <p>Used by {@link seedu.duke.CommandHandler} to validate user input
+     * before calling {@link #fromString}, since {@code fromString} defaults
+     * to {@link OtherCategory} for unrecognised input rather than throwing.</p>
+     *
+     * @param categoryString The string to check. Must not be null.
+     * @return {@code true} if the input matches a known category name.
+     */
+    public static boolean isValid(String categoryString) {
+        assert categoryString != null : "Category input string must not be null";
+        return switch (categoryString.toUpperCase()) {
+            case "FOOD", "TRANSPORT", "ENTERTAINMENT", "UTILITIES", "OTHER" -> true;
+            default -> false;
+        };
+    }
+
+    /**
      * Returns the display name of this category in uppercase.
      *
      * <p>This value is used for display output and file persistence.
@@ -64,15 +82,16 @@ public abstract class Category implements Comparable<Category> {
     /**
      * Returns a {@code Category} instance corresponding to the given string.
      *
-     * <p>Matching is case-insensitive. Unrecognised inputs default to
-     * {@link OtherCategory} rather than throwing an exception, to allow
-     * graceful handling of unknown values loaded from storage.</p>
+     * <p>Matching is case-insensitive. If the input does not match a recognised
+     * category, an {@link IllegalArgumentException} is thrown. Callers should
+     * validate input using {@link #isValid} before calling this method.</p>
      *
      * <p>Recognised values: {@code FOOD}, {@code TRANSPORT},
      * {@code ENTERTAINMENT}, {@code UTILITIES}, {@code OTHER}.</p>
      *
      * @param input The string to parse. Must not be null.
      * @return The matching {@code Category} instance.
+     * @throws IllegalArgumentException If the input does not match a recognised category.
      */
     public static Category fromString(String input) {
         assert input != null : "Category input string must not be null";
@@ -82,12 +101,10 @@ public abstract class Category implements Comparable<Category> {
             case "TRANSPORT" -> new TransportCategory();
             case "ENTERTAINMENT" -> new EntertainmentCategory();
             case "UTILITIES" -> new UtilitiesCategory();
-            default -> new OtherCategory();
+            case "OTHER" -> new OtherCategory();
+            default -> throw new IllegalArgumentException(
+                    "Unknown category: " + input);
         };
-
-        if (result instanceof OtherCategory && !input.equalsIgnoreCase("OTHER")) {
-            logger.warning("fromString | unrecognised category: " + input + ", defaulting to 'OTHER'");
-        }
 
         logger.fine("fromString succeeded | input: " + input + " -> " + result.getName());
         return result;

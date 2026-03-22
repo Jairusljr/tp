@@ -2,6 +2,9 @@ package seedu.duke.data;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+import seedu.duke.category.Category;
 
 /**
  * Manages a collection of {@link Expense} objects and tracks the cumulative total.
@@ -138,5 +141,15 @@ public class ExpenseList {
         total = BigDecimal.ZERO;
         // Post-clear invariant: total must be reset to exactly zero
         assert total.compareTo(BigDecimal.ZERO) == 0 : "Total should be zero after clear.";
+    }
+
+    public ArrayList<Expense> getRaw() {
+        return new ArrayList<>(expenses);
+    }
+
+    public ArrayList<Expense> getSortedByCategory() {
+        return expenses.stream()
+                .sorted(Comparator.comparing(Expense::getCategory))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
