@@ -7,6 +7,7 @@ import seedu.duke.data.Profile;
 import seedu.duke.data.Storage;
 import seedu.duke.data.SummaryReport;
 import seedu.duke.exception.InvalidAmountException;
+import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.ui.Ui;
 import seedu.duke.util.InputUtil;
@@ -98,7 +99,7 @@ public class CommandHandler {
             ui.printLine("Current Total: $" + expenseList.getTotal());
             ui.printLine("");
 
-        } catch (InvalidAmountException e) {
+        } catch (InvalidAmountException | InvalidCategoryException e) {
             ui.printLine(e.getMessage());
             ui.printLine("");
         }
@@ -116,7 +117,7 @@ public class CommandHandler {
      * @throws InvalidAmountException If the input is missing fields, contains a blank name,
      *                                or contains an invalid amount.
      */
-    private AddArguments parseAddArguments(String userInput) throws InvalidAmountException {
+    private AddArguments parseAddArguments(String userInput) throws InvalidAmountException, InvalidCategoryException {
         assert userInput != null : "User input should not be null";
         assert userInput.startsWith("add") : "Input should start with 'add'";
 
@@ -154,7 +155,7 @@ public class CommandHandler {
 
         if (!Category.isValid(categoryString)) {
             logger.warning("handleAdd rejected | reason: invalid category " + categoryString);
-            throw new InvalidAmountException("Invalid category! Valid categories: " +
+            throw new InvalidCategoryException("Invalid category! Valid categories: " +
                     "FOOD, TRANSPORT, ENTERTAINMENT, UTILITIES, OTHER\n");
         }
 
