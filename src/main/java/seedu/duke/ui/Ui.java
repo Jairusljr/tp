@@ -169,10 +169,11 @@ public class Ui {
         String savingsLine = InputUtil.formatMoney(report.currentSavings) + " (" + report.percentage + "% reached)";
         printLine("Current Savings: " + savingsLine);
         printLine("Distance to Goal: " + InputUtil.formatMoney(report.distance));
+        printLine("Adjusted Minimum Savings: " + InputUtil.formatMoney(report.monthlyRequired) + " / month");
         printLine("");
         printLine("Monthly Allowance: " + InputUtil.formatMoney(report.monthlyAllowance));
         printLine("Total Expenditure: " + InputUtil.formatMoney(report.totalExpenditure));
-        printLine("Monthly Surplus: " + InputUtil.formatMoney(report.monthlySurplus));
+        printLine("Monthly Surplus (Allowance - Expenditure): " + InputUtil.formatMoney(report.monthlySurplus));
         printLine("Estimated Goal Achievement: " + report.estimate);
         printLine("");
 

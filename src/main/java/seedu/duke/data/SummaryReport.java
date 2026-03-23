@@ -3,6 +3,7 @@ package seedu.duke.data;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.logging.Logger;
 import seedu.duke.util.LoggerUtil;
 
@@ -25,6 +26,7 @@ public class SummaryReport {
     public final BigDecimal monthlySurplus;
     public final String estimate;
     public final BigDecimal totalExpenditure;
+    public final BigDecimal monthlyRequired;
 
     /**
      * Constructs a {@code SummaryReport} from the user's current profile and expense list.
@@ -53,6 +55,27 @@ public class SummaryReport {
 
         this.percentage = computePercentage();
         this.estimate = computeEstimate();
+
+        // Calculate months remaining
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(today, profile.getDeadline());
+        int monthsLeft = period.getYears() * 12 + period.getMonths();
+        if (period.getDays() > 0) {
+            monthsLeft++; // Round up for partial months
+        }
+        if (monthsLeft <= 0) {
+            monthsLeft = 1;
+        }
+
+        // Calculate Distance to Goal / Months Remaining
+        BigDecimal distanceToGoal = profile.getBtoGoal().subtract(profile.getCurrentSavings());
+
+        if (distanceToGoal.compareTo(BigDecimal.ZERO) <= 0) {
+            this.monthlyRequired = BigDecimal.ZERO;
+        } else {
+            this.monthlyRequired = distanceToGoal.divide(
+                    BigDecimal.valueOf(monthsLeft), 2, java.math.RoundingMode.HALF_UP);
+        }
 
         logger.fine("Report values - Distance: " + distance + ", Surplus: " + monthlySurplus);
     }
