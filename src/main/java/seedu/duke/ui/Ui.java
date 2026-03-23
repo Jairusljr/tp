@@ -105,6 +105,8 @@ public class Ui {
         printLine("");
 
         printLine("Profile & Goal Management");
+        printLine("'sort'   <keyword> - sort the expenditure list by category or recency " +
+                "(e.g sort recent, sort category)");
         printLine("'savings' - add a surplus amount to your existing savings");
         printLine("'clear'   - wipe all current expenses from the list");
         printLine("'reset'   - wipes all profile data and expenses to start fresh.");
