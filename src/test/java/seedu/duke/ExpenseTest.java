@@ -44,4 +44,19 @@ public class ExpenseTest {
         assertEquals(new BigDecimal("0"), expense.getAmount());
         assertEquals("[OTHER] free item $0", expense.toString());
     }
+
+    @Test
+    void constructor_validInsertionOrder_storedCorrectly() {
+        Expense expense = new Expense("lunch", new BigDecimal("12.50"), Category.fromString("FOOD"), 3);
+
+        assertEquals(3, expense.getInsertionOrder());
+    }
+
+    @Test
+    void constructor_zeroInsertionOrder_storedCorrectly() {
+        // first expense in the list
+        Expense expense = new Expense("lunch", new BigDecimal("12.50"), Category.fromString("FOOD"), 0);
+
+        assertEquals(0, expense.getInsertionOrder());
+    }
 }
