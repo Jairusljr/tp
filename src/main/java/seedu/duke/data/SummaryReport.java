@@ -27,6 +27,7 @@ public class SummaryReport {
     public final String estimate;
     public final BigDecimal totalExpenditure;
     public final BigDecimal monthlyRequired;
+    public final String readinessLevel;
 
     /**
      * Constructs a {@code SummaryReport} from the user's current profile and expense list.
@@ -54,6 +55,7 @@ public class SummaryReport {
         this.monthlySurplus = monthlyAllowance.subtract(totalExpenditure);
 
         this.percentage = computePercentage();
+        this.readinessLevel = computeReadinessLevel(this.percentage);
         this.estimate = computeEstimate();
 
         // Calculate months remaining
@@ -78,6 +80,31 @@ public class SummaryReport {
         }
 
         logger.fine("Report values - Distance: " + distance + ", Surplus: " + monthlySurplus);
+    }
+
+    /**
+     * Determines a qualitative financial readiness level based on the savings percentage.
+     *
+     * <p>Maps the current progress to an encouraging status message using specific
+     * thresholds (100%, 70%, 50%, and 10%). This provides users with a quick
+     *  benchmark of their BTO downpayment progress.</p>
+     *
+     * @param percentage The current percentage of the BTO goal reached.
+     * @return A descriptive string indicating the user's readiness level and
+     * corresponding advice or encouragement.
+     */
+    private String computeReadinessLevel(int percentage) {
+        if (percentage >= 100) {
+            return "Ready - Time to sign that BTO!";
+        } else if (percentage >= 70) {
+            return "Secure - Keep it up, you're almost there!";
+        } else if (percentage >= 50) {
+            return "On Track - Let's go! You're more than halfway there";
+        } else if (percentage >= 10) {
+            return "Making Progress - Jiayou! You're making good progress";
+        } else {
+            return "Barely Started - Do start saving soon!!";
+        }
     }
 
     /**

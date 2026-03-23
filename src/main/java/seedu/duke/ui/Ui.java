@@ -152,6 +152,7 @@ public class Ui {
         logger.info("Rendering SummaryReport for user: " + report.name);
         printLine("===== BTO Readiness Report =====");
         printLine("User: " + report.name);
+        printLine("Readiness Level: " + report.readinessLevel);
         printLine("BTO Goal: " + InputUtil.formatMoney(report.btoGoal) + " (your share + fees)");
 
         LocalDate today = LocalDate.now();
