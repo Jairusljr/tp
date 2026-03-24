@@ -149,7 +149,6 @@ public class Ui {
         assert report.name != null : "Report name should not be null";
         assert report.deadline != null : "Deadline should not be null";
         assert report.currentSavings != null : "Current savings should not be null";
-        assert report.totalExpenditure != null : "Total expenditure should not be null";
         assert report.estimate != null : "Estimate should not be null";
 
         logger.info("Rendering SummaryReport for user: " + report.name);

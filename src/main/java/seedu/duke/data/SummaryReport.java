@@ -51,7 +51,7 @@ public class SummaryReport {
         assert btoGoal.compareTo(BigDecimal.ZERO) >= 0 : "BTO Goal should not be negative";
         assert monthlyAllowance.compareTo(BigDecimal.ZERO) >= 0 : "Allowance should not be negative";
 
-        this.totalExpenditure = expenseList.getTotal().add(recurringExpenseList.getTotal());;
+        this.totalExpenditure = expenseList.getTotal().add(recurringExpenseList.getTotal());
         this.distance = btoGoal.subtract(currentSavings);
         this.monthlySurplus = monthlyAllowance.subtract(totalExpenditure);
 
