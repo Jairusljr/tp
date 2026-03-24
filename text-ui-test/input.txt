@@ -12,15 +12,20 @@ savings
 add lunch 5 FOOD
 add
 add lunch -1 FOOD
-category 1 FOOD
-category 1
-category 1 HELLO
+add netflix 30 entertainment recurring
+add phone bill 20 utilities RECURRING
 add grab home 20 transport
 add hho 10 food
+find food
+find recurring
 sort
 sort foo
 sort category
 list
 sort recent
+list
+nextmonth
+list
+deleterecurring 1
 list
 bye
