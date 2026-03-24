@@ -70,11 +70,16 @@ public class Ui {
      * @param prompt Prompt message displayed before reading input.
      * @return The raw line entered by the user.
      */
-    public String readLine(Scanner in, String prompt){
+    public String readLine(Scanner in, String prompt) {
         assert in != null : "Scanner should not be null";
-        if (prompt != null && !prompt.isEmpty()){
+        if (prompt != null && !prompt.isEmpty()) {
             logger.info("Displaying prompt to user: " + prompt);
             printLine(prompt);
+        }
+
+        if (!in.hasNextLine()) {
+            logger.warning("No more input available. Returning bye.");
+            return "bye";
         }
 
         String input = in.nextLine();
