@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import seedu.duke.data.Profile;
 import seedu.duke.data.ExpenseList;
+import seedu.duke.data.RecurringExpenseList;
 import seedu.duke.util.LoggerUtil;
 
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class FinTrackPro {
     private final Ui ui;
     private final Profile profile;
     private final ExpenseList expenseList;
+    private final RecurringExpenseList recurringExpenseList;
     private final Storage storage;
     private final CommandHandler handler;
 
@@ -43,6 +45,7 @@ public class FinTrackPro {
         this.ui = new Ui();
         this.profile = new Profile();
         this.expenseList = new ExpenseList();
+        this.recurringExpenseList = new RecurringExpenseList();
         this.storage = new Storage("fintrack.txt");
         this.handler = new CommandHandler(ui, profile, expenseList, storage);
 
