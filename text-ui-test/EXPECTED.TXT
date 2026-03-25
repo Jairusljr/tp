@@ -28,10 +28,6 @@ When do you need to save this money by? (e.g., 2028-10-24)
 You have 1 years and 5 months and 30 days remaining.
 Nice! Based on your current savings, you have already met your goal.
 
-===============================================
-Current Month: Month 1
-===============================================
-
 Type 'help' to view my currently supported commands!
 Any non-command word would be echoed back to you you you
 Type 'bye' to exit!
@@ -52,6 +48,7 @@ Daily Transaction Commands
 Profile & Goal Management
 'sort'   <keyword> - sort the expenditure list by name, category or recency (e.g sort name, sort recent, sort category)
 'savings' - add a surplus amount to your existing savings
+'save'   - archive current month's expenses and advance to next month
 'clear'   - wipe all current expenses from the list
 'reset'   - wipes all profile data and expenses to start fresh.
 
@@ -99,12 +96,13 @@ Here are your recurring monthly commitments!
 1. netflix $30.00 [ENTERTAINMENT]
 2. phone bill $20.00 [UTILITIES]
 
-*** MONTH 1 EXPENSES ***
+*** MONTH 1 EXPENSES
 1. lunch $5.00 [FOOD]
 2. hho $10.00 [FOOD]
 3. grab home $20.00 [TRANSPORT]
+Month 1 Total: $35.00
 
-Total Expenditure (One-off + Recurring): $85
+Total Expenditure (All Months + Recurring): $120.00
 
 Expenses sorted by insertion order.
 
@@ -112,12 +110,13 @@ Here are your recurring monthly commitments!
 1. netflix $30.00 [ENTERTAINMENT]
 2. phone bill $20.00 [UTILITIES]
 
-*** MONTH 1 EXPENSES ***
+*** MONTH 1 EXPENSES
 1. lunch $5.00 [FOOD]
 2. grab home $20.00 [TRANSPORT]
 3. hho $10.00 [FOOD]
+Month 1 Total: $35.00
 
-Total Expenditure (One-off + Recurring): $85
+Total Expenditure (All Months + Recurring): $120.00
 
 You said: nextmonth
 
@@ -125,12 +124,13 @@ Here are your recurring monthly commitments!
 1. netflix $30.00 [ENTERTAINMENT]
 2. phone bill $20.00 [UTILITIES]
 
-*** MONTH 1 EXPENSES ***
+*** MONTH 1 EXPENSES
 1. lunch $5.00 [FOOD]
 2. grab home $20.00 [TRANSPORT]
 3. hho $10.00 [FOOD]
+Month 1 Total: $35.00
 
-Total Expenditure (One-off + Recurring): $85
+Total Expenditure (All Months + Recurring): $120.00
 
 Deleted recurring expense #1: [RECURRING][ENTERTAINMENT] netflix $30
 Recurring Total: $20
@@ -138,11 +138,12 @@ Recurring Total: $20
 Here are your recurring monthly commitments!
 1. phone bill $20.00 [UTILITIES]
 
-*** MONTH 1 EXPENSES ***
+*** MONTH 1 EXPENSES
 1. lunch $5.00 [FOOD]
 2. grab home $20.00 [TRANSPORT]
 3. hho $10.00 [FOOD]
+Month 1 Total: $35.00
 
-Total Expenditure (One-off + Recurring): $55
+Total Expenditure (All Months + Recurring): $90.00
 
 Goodbye James Gosling. Stay disciplined and get that house that you always wanted!
