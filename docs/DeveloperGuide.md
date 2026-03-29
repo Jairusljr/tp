@@ -81,3 +81,40 @@ An individual BTO budget planner for university students planning to apply for B
 ## 7 Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+## Use Cases
+
+### Managing Expenses
+(to be added by Kynaston)
+
+---
+
+### Sorting Expenses
+
+1. **Sorting by category**
+    1. Prerequisites: Multiple expenses of different categories in the list.
+    2. Test case: `sort category` Expected: Expenses reordered in category priority: FOOD, TRANSPORT, ENTERTAINMENT, UTILITIES, OTHER.
+    3. Test case: `sort recent` Expected: Expenses reordered back to insertion order.
+    4. Test case: `sort foo` Expected: List order unchanged. Error shown for unrecognised argument.
+    5. Other incorrect sort commands to try: `sort` (empty argument) Expected: Similar to previous.
+
+---
+
+### Managing Profile
+(to be added by Adam)
+---
+
+### Reset and Clear
+(to be added)
+---
+
+### Category Validation
+
+1. **Parsing a category from string**
+    1. Test case: `FOOD`, `food`, `fOoD` Expected: All resolve to a `FoodCategory` instance (case-insensitive).
+    2. Test case: `TRANSPORT`, `ENTERTAINMENT`, `UTILITIES`, `OTHER` Expected: Each resolves to its corresponding category class.
+    3. Test case: `HELLO` Expected: `IllegalArgumentException` thrown.
+    4. Test case: `Category.isValid("FOO")`, `Category.isValid("hello")` Expected: Returns `false`.
+
+2. **Category sort ordering**
+    1. Test case: Compare FOOD → TRANSPORT → ENTERTAINMENT → UTILITIES → OTHER. Expected: Each preceding category compares as less than the next, confirming sort priority.
