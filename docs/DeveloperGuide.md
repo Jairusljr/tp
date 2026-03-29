@@ -1,26 +1,25 @@
 # 1. Developer Guide
 ## Table of Contents
-* **[Acknowledgements](#2-acknowledgements)**
-  * **[Frameworks and base code](#21-frameworks-and-base-code)**
-  * **[Third-party libraries](#22-third-party-libraries)**
-  * **[Educational resources](#23-educational-resources)**
-* **[Design & Implementation](#3-design--implementation)**
-  * **[Architecture Diagram](#31-architecture-diagram)
-  * **[Category component](#32-category-component)**
-* **[Product Scope](#4-product-scope)**
-  * **[Target user profile](#41-target-user-profile)**
-  * **[Value proposition](#42-value-proposition)**
-  * **[User stories](#43-user-stories)**
-* **[Non-Functional Requirements](#5-non-functional-requirements)**
-  * **[Performance and scalability](#51-performance-and-scalability)**
-  * **[Data integrity](#52-data-integrity)**
-  * **[Security and privacy](#53-security-and-privacy)**
-  * **[Usability](#54-usability)**
-  * **[Environment](#55-environment)**
-* **[Glossary](#6-glossary)**
-* **[Instructions For Manual Testing](#7-instructions-for-manual-testing)**
-  * **[Sorting expenses](#sorting-expenses)**
-  * **[Category validation](#category-validation)**
+* **2. [Acknowledgements](#2-acknowledgements)**
+  * **2.1 [Frameworks and base code](#21-frameworks-and-base-code)**
+  * **2.2 [Third-party libraries](#22-third-party-libraries)**
+  * **2.3 [Educational resources](#23-educational-resources)**
+* **3. [Design & Implementation](#3-design--implementation)**
+  * **3.1 [Architecture Diagram](#31-architecture-diagram)**
+  * **3.2 [UML Diagrams](#32-uml-diagrams)**
+* **4. [Product Scope](#4-product-scope)**
+  * **4.1 [Target user profile](#41-target-user-profile)**
+  * **4.2 [Value proposition](#42-value-proposition)**
+  * **4.3 [User stories](#43-user-stories)**
+* **5. [Non-Functional Requirements](#5-non-functional-requirements)**
+  * **5.1 [Performance and scalability](#51-performance-and-scalability)**
+  * **5.2 [Data integrity](#52-data-integrity)**
+  * **5.3 [Security and privacy](#53-security-and-privacy)**
+  * **5.4 [Usability](#54-usability)**
+  * **5.5 [Environment](#55-environment)**
+* **6. [Glossary](#6-glossary)**
+* **7. [Instructions For Manual Testing](#7-instructions-for-manual-testing)**
+  * **7.1 [Test Cases](#71-test-cases)**
 
 # 2. Acknowledgements
 
@@ -89,6 +88,34 @@ The app consists of the following main components:
     - **InputUtil**: Validates and parses user input (amounts, dates, categories).
     - **LoggerUtil**: Provides centralized logging functionality for debugging and monitoring.
 
+### How the Architecture Components Interact with Each Other
+
+The sequence of interactions in a typical use case follows this pattern:
+
+1. **App Initialization**: FinTrackPro initializes all components (Ui, Storage, Profile, ExpenseList, etc.) and loads persisted data from disk via Storage.
+
+2. **User Input**: The user enters a command via the CLI. Ui captures this input as a string.
+
+3. **Command Parsing and Execution**:
+    - CommandHandler receives the input string.
+    - Parser receives and validates the input to identify the command type and arguments.
+    - CommandHandler interprets the parsed command and determines which Data components to interact with.
+
+4. **Logic Execution**:
+    - Depending on the command, Logic may:
+        - **Add/Delete/Edit**: Modifies Data (ExpenseList, Profile, RecurringExpenseList) in memory.
+        - **Validate**: Uses InputUtil and Category to ensure data correctness.
+        - **Calculate**: Uses BtoCalculator to compute financial metrics.
+        - **Archive**: Moves ExpenseList data to MonthlyArchive and resets for the new month.
+
+5. **Data Persistence**: After a state-changing command, Storage automatically saves the updated Data (Profile, ExpenseList, RecurringExpenseList, MonthlyArchive) to the hard disk.
+
+6. **Display Results**: Ui formats and displays the results or status message to the user via the CLI.
+
+7. **App Shutdown**: Upon user exit, FinTrackPro invokes cleanup methods and shuts down all components gracefully.
+
+This layered architecture promotes separation of concerns, making the codebase maintainable, testable, and scalable. 
+The sections below give more concrete details about each component.
 
 ## 3.2 UML Diagrams
 In this section, we will present the UML class diagrams, object diagrams and sequence diagrams to 
