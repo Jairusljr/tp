@@ -1,4 +1,13 @@
 # 1. Developer Guide
+This Developer Guide will showcase the design and implementation of FinTrackPro, a CLI-based financial
+planning application for BTO downpayment goal tracking with the use of UML diagrams and code snippets.
+
+It will also include instructions for manual testing of the product, along with a comprehensive list of 
+test cases to ensure the robustness and reliability of the application. 
+
+The guide is structured to provide a clear understanding of the architecture, design decisions, and testing 
+strategies employed in the development of FinTrackPro.
+
 ## Table of Contents
 * **2. [Acknowledgements](#2-acknowledgements)**
   * **2.1 [Frameworks and base code](#21-frameworks-and-base-code)**
