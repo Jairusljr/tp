@@ -786,3 +786,28 @@
 [2026-03-29 20:32:05] [INFO] seedu.duke.FinTrackPro - state=run.load.success | expected=check if initial setup is required | profileName=nicholas, btoGoal=12285.00, oneOffCount=0, recurringCount=0
 [2026-03-29 20:32:05] [INFO] seedu.duke.FinTrackPro - state=run.profile.existing | expected=enter command loop | profileName=nicholas, btoGoal=12285.00
 [2026-03-29 20:32:05] [INFO] seedu.duke.FinTrackPro - state=run.command-loop | expected=read command until bye | profileName=nicholas, oneOffCount=0, recurringCount=0
+[2026-03-29 20:32:14] [INFO] seedu.duke.FinTrackPro - state=startup | expected=run() entry | storagePath=fintrack.txt
+[2026-03-29 20:32:14] [INFO] seedu.duke.FinTrackPro - state=run.start | expected=show welcome and load persisted data | profileName=friend
+[2026-03-29 20:32:14] [INFO] seedu.duke.ui.Ui - Displaying welcome message and ASCII logo.
+[2026-03-29 20:32:14] [INFO] seedu.duke.FinTrackPro - state=run.load.success | expected=check if initial setup is required | profileName=nicholas, btoGoal=12285.00, oneOffCount=0, recurringCount=0
+[2026-03-29 20:32:14] [INFO] seedu.duke.FinTrackPro - state=run.profile.existing | expected=enter command loop | profileName=nicholas, btoGoal=12285.00
+[2026-03-29 20:32:14] [INFO] seedu.duke.FinTrackPro - state=run.command-loop | expected=read command until bye | profileName=nicholas, oneOffCount=0, recurringCount=0
+[2026-03-29 20:32:22] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='list'
+[2026-03-29 20:32:22] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=list, rawInput='list'
+[2026-03-29 20:32:22] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=printList | command=list
+[2026-03-29 20:32:22] [INFO] seedu.duke.FinTrackPro - state=list.start | expected=render recurring and one-off expenses | oneOffCount=0, recurringCount=0
+[2026-03-29 20:32:22] [INFO] seedu.duke.FinTrackPro - state=list.empty | expected=return to command loop | oneOffCount=0, recurringCount=0
+[2026-03-29 20:33:19] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='summary'
+[2026-03-29 20:33:19] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=summary, rawInput='summary'
+[2026-03-29 20:33:19] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=handler.handleSummary | command=summary
+[2026-03-29 20:33:19] [INFO] seedu.duke.CommandHandler - handleSummary executed | generating BTO readiness report
+[2026-03-29 20:33:19] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: nicholas
+[2026-03-29 20:33:19] [INFO] seedu.duke.ui.Ui - Rendering SummaryReport for user: nicholas
+[2026-03-29 20:33:19] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 12285.00, formatted: $12,285.00
+[2026-03-29 20:33:19] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1000, formatted: $1,000.00
+[2026-03-29 20:33:19] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 11285.00, formatted: $11,285.00
+[2026-03-29 20:33:19] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 663.82, formatted: $663.82
+[2026-03-29 20:33:19] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 4000, formatted: $4,000.00
+[2026-03-29 20:33:19] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 0, formatted: $0.00
+[2026-03-29 20:33:19] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 4000, formatted: $4,000.00
+[2026-03-29 20:33:19] [INFO] seedu.duke.ui.Ui - SummaryReport display completed.

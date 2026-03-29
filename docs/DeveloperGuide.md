@@ -1,9 +1,12 @@
 # 1. Developer Guide
+## Table of Contents
 * **[Acknowledgements](#2-acknowledgements)**
   * **[Frameworks and base code](#21-frameworks-and-base-code)**
   * **[Third-party libraries](#22-third-party-libraries)**
   * **[Educational resources](#23-educational-resources)**
 * **[Design & Implementation](#3-design--implementation)**
+  * **[Architecture Diagram](#31-architecture-diagram)
+  * **[Category component](#32-category-component)**
 * **[Product Scope](#4-product-scope)**
   * **[Target user profile](#41-target-user-profile)**
   * **[Value proposition](#42-value-proposition)**
@@ -37,8 +40,10 @@
 # 3 Design & Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+## 3.1 Architecture Diagram
 
-## Category component
+
+## 3.2 Category component
 ![Class Diagram](diagram/Category-UML-Diagram.png)
 
 
@@ -99,7 +104,7 @@ An individual BTO budget planner for university students planning to apply for B
 
 # 6 Glossary
 
-* *BTO (Build-To-Order)* - a subsidised public housing option scheme in Singapore where new flats are constructed only after a sufficient number of units (typically 65-70%) have been pre-booked by applicants
+* *BTO (Build-To-Order)* - a subsidized public housing option scheme in Singapore where new flats are constructed only after a sufficient number of units (typically 65-70%) have been pre-booked by applicants
 * *Contribution ratio* - the user's fractional share of the downpayment (0.0 to 1.0)
 * *Recurring expenses* - expenses that occur on a monthly basis following the same rates (eg Netflix subscription of $5.98/month), then you can run `addrecurring Netflix Subscription 5.98 entertainment recurring`
 * *Adjusted Minimum Savings* - minimum amount you need to save per month given your distance to goal and number of months remaining till the deadline 
@@ -122,7 +127,7 @@ An individual BTO budget planner for university students planning to apply for B
     1. Prerequisites: Multiple expenses of different categories in the list.
     2. Test case: `sort category` Expected: Expenses reordered in category priority: FOOD, TRANSPORT, ENTERTAINMENT, UTILITIES, OTHER.
     3. Test case: `sort recent` Expected: Expenses reordered back to insertion order.
-    4. Test case: `sort foo` Expected: List order unchanged. Error shown for unrecognised argument.
+    4. Test case: `sort foo` Expected: List order unchanged. Error shown for unrecognized argument.
     5. Other incorrect sort commands to try: `sort` (empty argument) Expected: Similar to previous.
 
 ---
